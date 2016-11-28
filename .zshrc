@@ -57,8 +57,8 @@ setopt auto_cd
 
 # ↑を設定すると、 .. とだけ入力したら1つ上のディレクトリに移動できるので……
 # 2つ上、3つ上にも移動できるようにする
-alias ...='cd ../..'
-alias ....='cd ../../..'
+#alias ...='cd ../..'
+#alias ....='cd ../../..'
 
 # -------------------------------------
 # パス
@@ -106,8 +106,8 @@ function vcs_prompt_info() {
 }
 # end VCS
 
-OK=""
-NG="X_X"
+#OK=""
+#NG="X_X"
 
 PROMPT=""
 PROMPT+="%(?.%F{green}$OK%f.%F{red}$NG%f) "
@@ -124,16 +124,16 @@ RPROMPT="[%*]"
 # -------------------------------------
 
 # -n 行数表示, -I バイナリファイル無視, svn関係のファイルを無視
-alias grep="grep --color -n -I --exclude='*.svn-*' --exclude='entries' --exclude='*/cache/*'"
+#alias grep="grep --color -n -I --exclude='*.svn-*' --exclude='entries' --exclude='*/cache/*'"
 
 # ls
-alias ls="ls -G" # color for darwin
+#alias ls="ls -G" # color for darwin
 alias l="ls -la"
-alias la="ls -la"
-alias l1="ls -1"
+#alias la="ls -la"
+#alias l1="ls -1"
 
 # tree
-alias tree="tree -NC" # N: 文字化け対策, C:色をつける
+#alias tree="tree -NC" # N: 文字化け対策, C:色をつける
 
 
 # -------------------------------------
@@ -169,3 +169,7 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 PATH=${PATH}:~/bin
+
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
