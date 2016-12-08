@@ -4,6 +4,7 @@
 ### Mydotfile + prezto : Set Up Guide
 
 下記linkのInstllationに従う※
+
 [prezto](https://github.com/sorin-ionescu/prezto)
 
 ※下記には、Instllation内容と重複する箇所があります。
