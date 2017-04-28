@@ -12,7 +12,17 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
-source ~/.bash_profile
+# path
+eval "$(rbenv init -)"
+export PATH="/usr/local/sbin:$PATH"
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+export PATH="$HOME/.cargo/bin:$PATH"
+PATH="$HOME/.cask/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 # -------------------------------------
 # 環境変数
@@ -145,11 +155,14 @@ alias l="ls -la"
 # open mac only
 alias op='open -a'
 alias ops="open -a 'sublime text'"
+alias opv="open -a 'visual studio code'"
+alias gs="git status"
+alias gd="git diff"
+alias be="bundle exec"
 
 # tmux
 alias tKill='tmux kill-session'
 
-# ↑を設定すると、 .. とだけ入力したら1つ上のディレクトリに移動できるので……
 # 2つ上、3つ上にも移動できるようにする
 alias ...='cd ../..'
 #alias ....='cd ../../..'
@@ -175,7 +188,7 @@ bindkey "^R" history-incremental-search-backward
 # -------------------------------------
 
 # cdしたあとで、自動的に ls する
-function chpwd() { ls -1 }
+function chpwd() { ls -a1 }
 
 # iTerm2のタブ名を変更する
 function title {
@@ -194,3 +207,7 @@ SAVEHIST=1000000
 PATH=${PATH}:~/bin
 
 ##
+
+if (which zprof > /dev/null 2>&1) ;then
+  zprof
+fi
