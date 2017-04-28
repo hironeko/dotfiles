@@ -159,6 +159,7 @@ alias opv="open -a 'visual studio code'"
 alias gs="git status"
 alias gd="git diff"
 alias be="bundle exec"
+alias ei="emacs -nw"
 
 # tmux
 alias tKill='tmux kill-session'
