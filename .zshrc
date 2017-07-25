@@ -63,9 +63,6 @@ setopt ignoreeof
 ## バックグラウンドジョブが終了したらすぐに知らせる。
 setopt no_tify
 
-## 直前と同じコマンドをヒストリに追加しない
-setopt hist_ignore_dups
-
 # 補完
 ## タブによるファイルの順番切り替えをしない
 unsetopt auto_menu
@@ -162,7 +159,7 @@ alias be="bundle exec"
 alias ei="emacs -nw"
 
 # tmux
-alias tKill='tmux kill-session'
+alias tk-s='tmux kill-session'
 
 # 2つ上、3つ上にも移動できるようにする
 alias ...='cd ../..'
@@ -191,24 +188,30 @@ bindkey "^R" history-incremental-search-backward
 # cdしたあとで、自動的に ls する
 function chpwd() { ls -a1 }
 
-# iTerm2のタブ名を変更する
+# change tab name(title)
 function title {
     echo -ne "\033]0;"$*"\007"
 }
 
 ### リンゴマーク出すための関数
-#function toon {
-#  echo -n ""
-#}
+# function toon {
+#   echo -n ""
+# }
 
+# histroy
 #ヒストリーサイズ設定
+# history size setting
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
-PATH=${PATH}:~/bin
-
+# 直前のコマンドは追加しない
+setopt hist_ignore_dups
+# コマンド履歴の呼び出し
+autoload -Uz history-search-end
+# other tab history saher
+setopt share_history
 ##
 
-if (which zprof > /dev/null 2>&1) ;then
-  zprof
-fi
+#if (which zprof > /dev/null 2>&1) ;then
+#  zprof
+#fi
