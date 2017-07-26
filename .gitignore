@@ -1,5 +1,5 @@
 .bash_profile
-.emacs.d
+.emacs.d/*
 .tmux.conf
 .emacs.d_bk/
 .DS_Store
