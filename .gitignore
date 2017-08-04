@@ -3,3 +3,4 @@
 .tmux.conf
 .emacs.d_bk/
 .DS_Store
+node_modules

@@ -19,10 +19,14 @@ export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=i"$PATH:$HOME/.composer/vendor/bin"
 PATH="$HOME/.cask/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+#export PYENV_ROOT="/usr/local/sbin/.pyenv"
+#export PATH="$PYENV_ROOT/bin:$PATH"
+#export PYENV_ROOT="/usr/local/bin/pyenv"
+export PYENV_ROOT="/usr/local/var/pyenv"
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+#eval "$(pyenv init -)"
 
 # -------------------------------------
 # 環境変数
