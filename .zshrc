@@ -40,8 +40,8 @@ export LC_ALL=en_US.UTF-8
 export EDITOR=/usr/local/bin/vim
 
 # ページャ
-export PAGER=/usr/local/bin/vimpager
-export MANPAGER=/usr/local/bin/vimpager
+#export PAGER=/usr/local/bin/vimpager
+#export MANPAGER=/usr/local/bin/vimpager
 
 
 # -------------------------------------
@@ -157,13 +157,19 @@ alias l="ls -la"
 alias op='open -a'
 alias ops="open -a 'sublime text'"
 alias opv="open -a 'visual studio code'"
+# Git command
 alias gs="git status"
 alias gd="git diff"
+# Rails command
 alias be="bundle exec"
+# emacs command
 alias ei="emacs -nw"
-
 # tmux
 alias tk-s='tmux kill-session'
+# exa command
+alias le="exa -l" # file view
+alias leg="exa -l --git" #git state view 
+alias et="exa -T" #Tree view 
 
 # 2つ上、3つ上にも移動できるようにする
 alias ...='cd ../..'

@@ -56,6 +56,7 @@ CELLAR_NAME=(
   postgresql
   mysql
   vim
+  exa
 )
 
 for cellar in ${CELLAR_NAME[@]}
@@ -80,6 +81,7 @@ CASK_NAME=(
   dropbox
   iterm2
   slack
+  quip
 )
 
 for cask in ${CASK_NAME[@]}
