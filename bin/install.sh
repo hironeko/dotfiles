@@ -11,7 +11,7 @@ then
   if test ! "$(uname)" = "Darwin"
   then
     echo "  I nstalling Homebrew for your PC."
-   # /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 fi
 
@@ -28,8 +28,8 @@ DOT_FILES=(
 
 for file in ${DOT_FILES[@]}
  do
-  echo $file
-  #ln -sf $HOME/dotfiles/$file $HOME/$file
+  #echo $file
+  ln -sf $HOME/dotfiles/$file $HOME/$file
 done
 
 #############################################
@@ -82,12 +82,13 @@ CASK_NAME=(
   iterm2
   slack
   quip
+  gyazo
 )
 
 for cask in ${CASK_NAME[@]}
  do
-  echo $cask
-  #brew cask install $cask
+  #echo $cask
+  brew cask install $cask
 done
 
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
@@ -97,4 +98,4 @@ for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
   ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
 
-#source $HOME/$ZSHRC
+source $HOME/$ZSHRC
