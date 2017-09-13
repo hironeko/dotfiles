@@ -170,6 +170,8 @@ alias tk-s='tmux kill-session'
 alias le="exa -l" # file view
 alias leg="exa -l --git" #git state view 
 alias et="exa -T" #Tree view 
+#docker-compose
+alias dc="docker-compose"
 
 # 2つ上、3つ上にも移動できるようにする
 alias ...='cd ../..'
