@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# sh install_brew.sh
 #ZSHRC=~/.zshrc
 
 # ログインシェルの変更
@@ -22,8 +23,7 @@ fi
 CELLAR_NAME=(
   nvm
   sqlite
-  yarn
-  php70
+  php71
   git
   pyenv
   go
@@ -57,11 +57,13 @@ CASK_NAME=(
   iterm2
   slack
   quip
-  gyazo
+  vagrant
+  evernote
 )
 
 for cask in ${CASK_NAME[@]}
  do
-  echo $cask
+   echo $cask
+   echo cask install $cask
   #brew cask install $cask
 done

@@ -19,14 +19,10 @@ export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH=i"$PATH:$HOME/.composer/vendor/bin"
+export PATH="$PATH:$HOME/.composer/vendor/bin"
 PATH="$HOME/.cask/bin:$PATH"
-#export PYENV_ROOT="/usr/local/sbin/.pyenv"
-#export PATH="$PYENV_ROOT/bin:$PATH"
-#export PYENV_ROOT="/usr/local/bin/pyenv"
 export PYENV_ROOT="/usr/local/var/pyenv"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-#eval "$(pyenv init -)"
 
 # -------------------------------------
 # 環境変数
@@ -112,11 +108,13 @@ zstyle ":vcs_info:bzr:*" use-simple true
 
 zstyle ":vcs_info:*" max-exports 6
 
+# %b カレントブランチ
+# %u not add  %c add only  %n yourname
 if is-at-least 4.3.10; then
     zstyle ":vcs_info:git:*" check-for-changes true # commitしていないのをチェック
-    zstyle ":vcs_info:git:*" stagedstr "<S>"
-    zstyle ":vcs_info:git:*" unstagedstr "<U>"
-    zstyle ":vcs_info:git:*" formats "(%b) %c%u"
+    zstyle ":vcs_info:git:*" stagedstr "%F{yellow}<Stage>"
+    zstyle ":vcs_info:git:*" unstagedstr "%F{magenta}<Unstage>"
+    zstyle ":vcs_info:git:*" formats "%F{cyan}(%b) %c%u%f"
     zstyle ":vcs_info:git:*" actionformats "(%s)-[%b|%a] %c%u"
 fi
 
