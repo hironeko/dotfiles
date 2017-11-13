@@ -1,27 +1,56 @@
 #!/bin/bash
 
-# change default shell
-chsh -s /bin/zsh
+if [[ `uname` -eq "Darwin" ]]; then
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
+brew upgrade
 brew update
 
-brew tap homebrew/php71
+# tap
+brew tap homebrew/php71 \
+caskroom/cask
 
-brew install nvm \
-sqlite \
-git \
-pyenv \
-go \
-tree \
-composer \
-erlang \
-elixir \
-postgresql \
-mysql \
-vim
+echo <<EOF
 
+#############################################
+#                                           #
+#        brew install cellar                #
+#                                           #
+#############################################
+
+EOF
+
+CELLAR_NAME=(
+    nvm
+    sqlite
+    git
+    pyenv
+    go
+    tree
+    php71
+    composer
+    erlang
+    elixir
+    postgresql
+    mysql
+    vim
+    rbenv
+)
+
+for cellar in ${CELLAR_NAME[@]}; do
+  brew install $cellar
+done
+
+echo <<EOF
+
+############################################
+#                                          #
+#        brew cask install                 #
+#                                          #
+############################################
+
+EOF
 
 CASK_NAME=(
   clipy
@@ -37,12 +66,18 @@ CASK_NAME=(
   virtualbox
 )
 
-for cask in ${CASK_NAME[@]}
-do
+for cask in ${CASK_NAME[@]}; do
   brew cask install $cask
 done
 
-echo << EOS
-complete install
+brew cleanup
+brew cask cleanup
+
+echo <<EOF
+
+****************************
+complete brew install
 let's enjoy!!
-EOS
+****************************
+
+EOF

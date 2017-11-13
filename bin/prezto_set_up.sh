@@ -1,3 +1,7 @@
+#!/bin/bash
+
+# change default shell
+chsh -s /bin/zsh
 
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
@@ -13,11 +17,9 @@ DOT_FILES=(
     package.json
 )
 
-for file in ${DOT_FILES[@]}
-do
+for file in ${DOT_FILES[@]}; do
     #echo $file
     ln -sf $HOME/dotfiles/$file $HOME/$file
 done
 
-#source $HOME/$ZSHRC
 exec $SHELL -l
