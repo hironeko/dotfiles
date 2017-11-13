@@ -1,6 +1,7 @@
 #!/bin/bash
 
-if [[ `uname` -eq "Darwin" ]]; then
+if test ! $(which brew); then
+  echo "Installing Homebrew for your PC."
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
@@ -8,8 +9,7 @@ brew upgrade
 brew update
 
 # tap
-brew tap homebrew/php71 \
-caskroom/cask
+brew tap homebrew/php
 
 echo <<EOF
 
@@ -39,7 +39,11 @@ CELLAR_NAME=(
 )
 
 for cellar in ${CELLAR_NAME[@]}; do
-  brew install $cellar
+  if brew list "$cellar" > /dev/null 2>&1; then
+      echo "$cellar already installed.... skipping"
+  else
+      brew install $cellar
+  fi
 done
 
 echo <<EOF
@@ -67,7 +71,11 @@ CASK_NAME=(
 )
 
 for cask in ${CASK_NAME[@]}; do
-  brew cask install $cask
+  if brew cask list "$cask" > /dev/null 2>&1; then
+      echo "$cask already installed.... skipping"
+  else
+      brew install $cask
+  fi
 done
 
 brew cleanup
@@ -81,3 +89,5 @@ let's enjoy!!
 ****************************
 
 EOF
+
+exit 0

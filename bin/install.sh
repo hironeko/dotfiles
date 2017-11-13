@@ -5,15 +5,19 @@
 
 # ログインシェルの変更
 #chsh -s /bin/zsh
-## コマンドの有無
-has() {
-    type "$1" > /dev/null 2>&1
-}
 
-if has "brew"; then
-    echo "yes"
+# コマンドの有無
+# directoryの確認
+if [[ -d $HOME/dotfiles ]]; then
+  echo "done dotfiles"
+  exit 0
+else
+  echo "git cloning......."
+  git clone https://github.com/hironeko/dotfiles.git
+  echo "done git clone"
 fi
 
+# set up for macOSX
 if [[ `uname` -eq "Darwin" ]]; then
-    echo "Installing Homebrew for your PC."
+  source $HOME/dotfiles/bin/mac_set_up.sh
 fi
