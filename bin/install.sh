@@ -10,10 +10,10 @@
 # directoryの確認
 if [[ -d $HOME/dotfiles ]]; then
   echo "done dotfiles"
-  exit 0
+  #exit 0
 else
   echo "git cloning......."
-  git clone https://github.com/hironeko/dotfiles.git
+  #git clone https://github.com/hironeko/dotfiles.git
   echo "done git clone"
 fi
 
@@ -21,3 +21,6 @@ fi
 if [[ `uname` -eq "Darwin" ]]; then
   source $HOME/dotfiles/bin/mac_set_up.sh
 fi
+
+# TODO: set up for prezto
+

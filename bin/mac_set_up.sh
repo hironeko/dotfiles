@@ -43,6 +43,7 @@ for cellar in ${CELLAR_NAME[@]}; do
       echo "$cellar already installed.... skipping"
   else
       brew install $cellar
+      echo "$cellar installing.... now"
   fi
 done
 
@@ -74,12 +75,14 @@ for cask in ${CASK_NAME[@]}; do
   if brew cask list "$cask" > /dev/null 2>&1; then
       echo "$cask already installed.... skipping"
   else
-      brew install $cask
+      brew cask install $cask
   fi
 done
 
 brew cleanup
 brew cask cleanup
+
+xcode-select --install
 
 echo <<EOF
 
