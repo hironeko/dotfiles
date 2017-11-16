@@ -36,7 +36,6 @@ values."
      vimscript
      elixir
      yaml
-     ;; lang
      html
      ruby
      python
@@ -63,8 +62,6 @@ values."
      emoji
      osx
      markdown
-     ;; git
-     ;; markdown
      org
      ;; (shell :variables
      ;;        shell-default-height 30

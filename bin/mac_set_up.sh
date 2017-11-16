@@ -9,7 +9,8 @@ brew upgrade
 brew update
 
 # tap
-brew tap homebrew/php
+brew tap homebrew/php \
+     Goles/battery
 
 echo <<EOF
 
@@ -36,6 +37,10 @@ CELLAR_NAME=(
     mysql
     vim
     rbenv
+    git-flow
+    yarn
+    battery
+    tmux
 )
 
 for cellar in ${CELLAR_NAME[@]}; do

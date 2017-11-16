@@ -34,7 +34,7 @@ export LC_ALL=en_US.UTF-8
 
 # エディタ
 export EDITOR=/usr/local/bin/vim
-
+export VISUAL=/usr/local/bin/vim
 # ページャ
 #export PAGER=/usr/local/bin/vimpager
 #export MANPAGER=/usr/local/bin/vimpager
@@ -163,7 +163,10 @@ alias be="bundle exec"
 # emacs command
 alias ei="emacs -nw"
 # tmux
-alias tk-s='tmux kill-session'
+alias ts='tmux new -s'
+alias tks='tmux kill-session'
+alias tl='tmux ls'
+alias ta='tmux a'
 # exa command
 alias le="exa -l" # file view
 alias leg="exa -l --git" #git state view 
