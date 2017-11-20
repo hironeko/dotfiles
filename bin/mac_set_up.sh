@@ -12,10 +12,10 @@ brew upgrade
 brew update
 
 # tap
-brew tap homebrew/php \
-     Goles/battery
+brew tap homebrew/php
+brew tap Goles/battery
 
-echo <<EOF
+cat <<EOF
 
 #############################################
 #                                           #
@@ -50,12 +50,13 @@ for cellar in ${CELLAR_NAME[@]}; do
   if brew list "$cellar" > /dev/null 2>&1; then
       echo "$cellar already installed.... skipping"
   else
-      brew install $cellar
       echo "$cellar installing.... now"
+      brew install $cellar
+      echo "$cellar installing.... done"
   fi
 done
 
-echo <<EOF
+cat <<EOF
 
 ############################################
 #                                          #
@@ -92,7 +93,7 @@ brew cask cleanup
 
 xcode-select --install
 
-echo <<EOF
+cat <<EOF
 
 ****************************
 complete brew install

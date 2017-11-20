@@ -29,4 +29,10 @@ else
     echo "done change zsh"
 fi
 
+# spacemacs clone
+if [ ! -f $HOME/.emacs.d/spacemacs.mk ]; then
+    git clone git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d
+    emacs --insecure
+fi
+
 exit 0
