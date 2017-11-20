@@ -23,3 +23,5 @@ for file in ${DOT_FILES[@]}; do
 done
 
 exec $SHELL -l
+
+exit 0

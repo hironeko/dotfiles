@@ -23,4 +23,10 @@ if [[ `uname` -eq "Darwin" ]]; then
 fi
 
 # TODO: set up for prezto
+if [ $SHELL = "/bin/bash" ]; then
+    source $HOME/dotfiles/bin/prezto_set_up.sh
+else
+    echo "done change zsh"
+fi
 
+exit 0

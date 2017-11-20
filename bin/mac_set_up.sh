@@ -3,6 +3,9 @@
 if test ! $(which brew); then
   echo "Installing Homebrew for your PC."
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+elif brew doctor > /dev/null 2>&1; then
+    echo "done brew"
+    exit 0
 fi
 
 brew upgrade
@@ -98,4 +101,4 @@ let's enjoy!!
 
 EOF
 
-exit 0
+exit 1

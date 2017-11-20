@@ -1,3 +1,9 @@
+set term=xterm-256color
+
+highlight Comment ctermfg=DarkCyan
+"変更時に再読み込み
+set autoread
+
 "カーソルの位置表示
 set ruler
 
@@ -11,7 +17,9 @@ set cursorline
 set wrap
 
 "syntax hight light
-syntax on
+syntax enable
+"color scheme
+colorscheme koehler
 
 "background color
 "set background=dark
@@ -19,10 +27,11 @@ syntax on
 "tab=Half-width space true
 set expandtab
 
-"space with 4space
+"space with 4
 set tabstop=4
 ">> or << autoindet
 set shiftwidth=4
+set paste
 
 "back space true
 set backspace=indent,eol,start
@@ -40,3 +49,12 @@ set nostartofline
 imap [ []<left>
 imap ( ()<left>
 imap { {}<left>
+
+
+" search
+"大文字小文字の区別をしない
+set ignorecase
+"行末までの検索されたら行頭へ
+set wrapscan
+"検索結果をhighlight
+set hlsearch
