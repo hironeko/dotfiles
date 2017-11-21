@@ -21,7 +21,7 @@ for file in ${DOT_FILES[@]}; do
     ln -sf $HOME/dotfiles/$file $HOME/$file
 done
 
-ln -nfr $HOME/dotfiles/.emacs.d $HOME/.emacs.d
+ln -nfs $HOME/dotfiles/.emacs.d $HOME/.emacs.d
 
 exec $SHELL -l
 
