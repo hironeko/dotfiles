@@ -36,8 +36,4 @@ if [ ! -e $HOME/.emacs.d/spacemacs.mk ]; then
     . $HOME/dotfiles/bin/spacemacs_set_up.sh
 fi
 
-if emacs --version > /dev/null 2>&1; then
-    emacs --insecure
-fi
-
 exit 0
