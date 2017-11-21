@@ -22,17 +22,18 @@ else
     echo "done change zsh"
 fi
 
+cat <<EOF
+
+    #############################################
+    #                                           #
+    #        spacemacs install ...now           #
+    #                                           #
+    #############################################
+
+EOF
+
 # spacemacs clone
 if [ ! -e $HOME/.emacs.d/spacemacs.mk ]; then
-    cat <<EOF
-
-        #############################################
-        #                                           #
-        #        spacemacs install ...now           #
-        #                                           #
-        #############################################
-
-    EOF
     . $HOME/dotfiles/bin/spacemacs_set_up.sh
 fi
 
