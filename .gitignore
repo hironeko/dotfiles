@@ -1,3 +1,4 @@
+!.gitkeep
 .bash_profile
 .emacs.d/*
 .tmux.conf

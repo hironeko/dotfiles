@@ -10,7 +10,6 @@ zsh -c 'setopt EXTENDED_GLOB; for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms
 DOT_FILES=(
     .zshrc
     .bash_profile
-    .emacs.d
     .spacemacs
     .tmux.conf
     .vimrc
@@ -22,4 +21,8 @@ for file in ${DOT_FILES[@]}; do
     ln -sf $HOME/dotfiles/$file $HOME/$file
 done
 
+ln -nfr $HOME/dotfiles/.emacs.d $HOME/.emacs.d
+
 exec $SHELL -l
+
+return 0
