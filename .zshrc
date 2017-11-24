@@ -15,14 +15,15 @@ fi
 # path
 eval "$(rbenv init -)"
 export PATH="/usr/local/sbin:$PATH"
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 PATH="$HOME/.cask/bin:$PATH"
 export PYENV_ROOT="/usr/local/var/pyenv"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+export NVM_DIR=$HOME/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
 
 # -------------------------------------
 # 環境変数

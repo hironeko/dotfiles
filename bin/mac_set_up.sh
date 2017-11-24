@@ -41,7 +41,6 @@ CELLAR_NAME=(
     vim
     rbenv
     git-flow
-    yarn
     battery
     tmux
 )
