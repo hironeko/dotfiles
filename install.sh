@@ -5,7 +5,7 @@ if [[ -d $HOME/dotfiles ]]; then
   echo "done dotfiles"
 else
   echo "git cloning......."
-  #git clone https://github.com/hironeko/dotfiles.git
+  git clone --recursive https://github.com/hironeko/dotfiles.git
   echo "done git clone"
 fi
 
@@ -18,7 +18,7 @@ fi
 if [ $SHELL = "/bin/bash" ]; then
     . $HOME/dotfiles/bin/prezto_set_up.sh
 else
-    echo "done change zsh"
+    echo "done changed zsh"
 fi
 
 cat <<EOF

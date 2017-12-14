@@ -18,7 +18,7 @@ export PATH="/usr/local/sbin:$PATH"
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$PATH:$HOME/.composer/vendor/bin"
-PATH="$HOME/.cask/bin:$PATH"
+# PATH="$HOME/.cask/bin:$PATH"
 export PYENV_ROOT="/usr/local/var/pyenv"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 export NVM_DIR=$HOME/.nvm
@@ -113,10 +113,25 @@ zstyle ":vcs_info:*" max-exports 6
 # %u not add  %c add only  %n yourname
 if is-at-least 4.3.10; then
     zstyle ":vcs_info:git:*" check-for-changes true # commitしていないのをチェック
-    zstyle ":vcs_info:git:*" stagedstr "%F{yellow}<Stage>"
-    zstyle ":vcs_info:git:*" unstagedstr "%F{magenta}<Unstage>"
-    zstyle ":vcs_info:git:*" formats "%F{cyan}(%b) %c%u%f"
-    zstyle ":vcs_info:git:*" actionformats "(%s)-[%b|%a] %c%u"
+    zstyle ":vcs_info:git:*" stagedstr "%F{yellow} ✚"
+    zstyle ":vcs_info:git:*" unstagedstr "%F{magenta} ✖"
+    zstyle ":vcs_info:git:*" formats "%F{cyan}(%b)%c%u%f"
+    zstyle ":vcs_info:git:*" actionformats "(%s)-[%b|%a]%c%u"
+    # Set git-info parameters.
+    #zstyle ':prezto:module:git:info' verbose 'yes'
+    #zstyle ':prezto:module:git:info:action' format '%F{7}:%f%%B%F{9}%s%f%%b'
+    #zstyle ':prezto:module:git:info:added' format ' %%B%F{2}✚%f%%b'
+    #zstyle ':prezto:module:git:info:ahead' format ' %%B%F{13}⬆%f%%b'
+    #zstyle ':prezto:module:git:info:behind' format ' %%B%F{13}⬇%f%%b'
+    #zstyle ':prezto:module:git:info:branch' format ' %%B%F{2}%b%f%%b'
+    #zstyle ':prezto:module:git:info:commit' format ' %%B%F{3}%.7c%f%%b'
+    #zstyle ':prezto:module:git:info:deleted' format ' %%B%F{1}✖%f%%b'
+    #zstyle ':prezto:module:git:info:modified' format ' %%B%F{4}✱%f%%b'
+    #zstyle ':prezto:module:git:info:position' format ' %%B%F{13}%p%f%%b'
+    #zstyle ':prezto:module:git:info:renamed' format ' %%B%F{5}➜%f%%b'
+    #zstyle ':prezto:module:git:info:stashed' format ' %%B%F{6}✭%f%%b'
+    #zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{3}═%f%%b'
+    #zstyle ':prezto:module:git:info:untracked' format ' %%B%F{7}◼%f%%b'
 fi
 
 precmd(){ vcs_info }
@@ -148,9 +163,6 @@ RPROMPT=\$vcs_info_msg_0_
 alias l="ls -la"
 #alias la="ls -la"
 #alias l1="ls -1"
-
-# tree
-#alias tree="tree -NC" # N: 文字化け対策, C:色をつける
 
 # open mac only
 alias op='open -a'
