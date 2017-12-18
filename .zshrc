@@ -161,8 +161,6 @@ RPROMPT=\$vcs_info_msg_0_
 # ls
 #alias ls="ls -G" # color for darwin
 alias l="ls -la"
-#alias la="ls -la"
-#alias l1="ls -1"
 
 # open mac only
 alias op='open -a'
