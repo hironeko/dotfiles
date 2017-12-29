@@ -23,7 +23,10 @@ export PYENV_ROOT="/usr/local/var/pyenv"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 export NVM_DIR=$HOME/.nvm
 source $(brew --prefix nvm)/nvm.sh
-
+# android
+export ANDROID_PATH=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_PATH/tools
+export PATH=$PATH:$ANDROID_PATH/platform-tools
 
 # -------------------------------------
 # 環境変数
@@ -182,8 +185,10 @@ alias ta='tmux a'
 alias le="exa -l" # file view
 alias leg="exa -l --git" #git state view 
 alias et="exa -T" #Tree view 
-#docker-compose
+# docker-compose
 alias dc="docker-compose"
+# react-native
+alias reactn="react-native"
 
 # 2つ上、3つ上にも移動できるようにする
 alias ...='cd ../..'
