@@ -76,6 +76,7 @@ CASK_NAME=(
   quip
   vagrant
   virtualbox
+  visual-studio-code
 )
 
 for cask in ${CASK_NAME[@]}; do

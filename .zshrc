@@ -13,17 +13,36 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
 fi
 
 # path
-eval "$(rbenv init -)"
 export PATH="/usr/local/sbin:$PATH"
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+# ruby
+eval "$(rbenv init -)"
+
+# not use
+# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+# rust
 export PATH="$HOME/.cargo/bin:$PATH"
+export RUST_SRC_PATH="$(echo $HOME/.multirust/toolchains/*/lib/rustlib/src/rust/src)"
+
+# composer
 export PATH="$PATH:$HOME/.composer/vendor/bin"
-# PATH="$HOME/.cask/bin:$PATH"
+
+# pyenv
 export PYENV_ROOT="/usr/local/var/pyenv"
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which pyenv > /dev/null; then
+    eval "$(pyenv init -)";
+fi
+
+# go
+export GOPATH="$HOME/.go"
+export PATH=$PATH:$GOPATH/bin
+
+# nvm
 export NVM_DIR=$HOME/.nvm
 source $(brew --prefix nvm)/nvm.sh
-# android
+
+# android studio
 export ANDROID_PATH=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_PATH/tools
 export PATH=$PATH:$ANDROID_PATH/platform-tools
@@ -183,8 +202,8 @@ alias tl='tmux ls'
 alias ta='tmux a'
 # exa command
 alias le="exa -l" # file view
-alias leg="exa -l --git" #git state view 
-alias et="exa -T" #Tree view 
+alias leg="exa -l --git" #git state view
+alias et="exa -T" #Tree view
 # docker-compose
 alias dc="docker-compose"
 # react-native
