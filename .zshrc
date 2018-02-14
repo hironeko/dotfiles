@@ -15,6 +15,8 @@ fi
 # path
 export PATH="/usr/local/sbin:$PATH"
 
+export PATH="$PATH:~/.local/bin"
+
 # ruby
 eval "$(rbenv init -)"
 
