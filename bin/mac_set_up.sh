@@ -2,6 +2,7 @@
 
 if test ! $(which brew); then
   echo "Installing Homebrew for your PC."
+  xcode-select --install
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 elif brew doctor > /dev/null 2>&1; then
     echo "done brew"
