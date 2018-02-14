@@ -3,7 +3,7 @@
 RELEASE_FILE=/etc/os-release
 
 # set up for macOSX
-if [[ `uname` -eq "Darwin" ]]; then
+if [[ `uname` == "Darwin" ]]; then
     # directoryの確認
     if [[ -d $HOME/dotfiles ]]; then
         echo "done dotfiles"
