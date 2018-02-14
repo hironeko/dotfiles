@@ -91,13 +91,16 @@ done
 brew cleanup
 brew cask cleanup
 
-xcode-select --install
+#xcode-select --install
 
+echo ""
 cat <<EOF
 
 ****************************
+
 complete brew install
 let's enjoy!!
+
 ****************************
 
 EOF

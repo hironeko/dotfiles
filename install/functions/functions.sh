@@ -53,7 +53,7 @@ EOF
     #############################################
 
 EOF
-
+    emacs --insecure
 }
 
 # git-flow set up for linux
@@ -61,12 +61,3 @@ gitflow () {
     curl -sL https://raw.githubusercontent.com/hironeko/setUpShells/develop/gitflow_set.sh | sh
 }
 
-
-hoge () {
-    cat <<EOF
-    test
-    hoge
-    +++++++
-EOF
-
-}

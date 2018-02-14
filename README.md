@@ -6,12 +6,10 @@
 
 - 下記コマンドで`Homebrew` + `prezto` の設定が完了する
 ```shell
-curl -sL https://raw.githubusercontent.com/hironeko/dotfiles/master/install.sh | sh
-emacs --insecure
+curl -sL https://raw.githubusercontent.com/hironeko/dotfiles/master/install/install.sh | sh
 ```
 
 
-*TODO*
 
 ### TODO
 
