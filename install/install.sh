@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#. ./functions/functions.sh
 
 RELEASE_FILE=/etc/os-release
 
@@ -9,10 +8,14 @@ if [[ `uname` == "Darwin" ]]; then
     # directoryの確認
     if [[ -d $HOME/dotfiles ]]; then
         echo "done dotfiles"
-        . ./functions/functions.sh
+        . $HOME/dotfiles/install/functions/functions.sh
         hoge
     else
-        dotfiles
+        echo "git cloning......."
+        git clone --recursive https://github.com/hironeko/dotfiles.git $HOME/dotfiles
+        . $HOME/dofiles/install/functions/functions.sh
+        prezto_set
+        spacemacs_set
     fi
 elif grep -e '^NAME="CentOS' $RELEASE_FILE >/dev/null; then
     echo "CentOs"

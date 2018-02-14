@@ -1,9 +1,16 @@
 #!/bin/bash
 
-dotfiles () {
-    echo "git cloning......."
-    git clone --recursive https://github.com/hironeko/dotfiles.git $HOME/dotfiles
-    echo "done git clone , start shell"
+prezto_set () {
+    cat <<EOF
+
+    #############################################
+    #                                           #
+    #        prezto setup... satrt              #
+    #                                           #
+    #############################################
+
+EOF
+
     . $HOME/dotfiles/bin/mac_set_up.sh
     # TODO: set up for prezto
     if [ $SHELL = "/bin/bash" ]; then
@@ -15,7 +22,20 @@ dotfiles () {
 
     #############################################
     #                                           #
-    #        spacemacs install ...now           #
+    #        prezto setup... done               #
+    #                                           #
+    #############################################
+
+EOF
+
+}
+
+spacemacs_set () {
+    cat <<EOF
+
+    #############################################
+    #                                           #
+    #        spacemacs install ...satrt         #
     #                                           #
     #############################################
 
@@ -24,6 +44,16 @@ EOF
     if [ ! -e $HOME/.emacs.d/spacemacs.mk ]; then
         . $HOME/dotfiles/bin/spacemacs_set_up.sh
     fi
+    cat <<EOF
+
+    #############################################
+    #                                           #
+    #        spacemacs install ...done          #
+    #                                           #
+    #############################################
+
+EOF
+
 }
 
 # git-flow set up for linux
