@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./functions/functions.sh
+#. ./functions/functions.sh
 
 RELEASE_FILE=/etc/os-release
 
@@ -9,6 +9,7 @@ if [[ `uname` == "Darwin" ]]; then
     # directoryの確認
     if [[ -d $HOME/dotfiles ]]; then
         echo "done dotfiles"
+        . ./functions/functions.sh
         hoge
     else
         dotfiles
