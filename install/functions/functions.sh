@@ -67,5 +67,6 @@ hoge () {
     test
     hoge
     +++++++
- EOF
+EOF
+
 }
