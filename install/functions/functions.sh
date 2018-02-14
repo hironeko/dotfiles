@@ -64,8 +64,8 @@ gitflow () {
 
 hoge () {
     cat <<EOF
-    "test"
-    "hoge"
-    "+++++++"
+    test
+    hoge
+    +++++++
  EOF
 }
