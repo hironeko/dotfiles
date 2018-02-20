@@ -12,42 +12,19 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
+
+# -------------------------------------
+# alias
+# -------------------------------------
+
+. $HOME/dotfiles/zsh/alias
+
+# -------------------------------------
 # path
-export PATH="/usr/local/sbin:$PATH"
+# -------------------------------------
 
-export PATH="$PATH:~/.local/bin"
+. $HOME/dotfiles/zsh/path
 
-# ruby
-eval "$(rbenv init -)"
-
-# not use
-# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-
-# rust
-export PATH="$HOME/.cargo/bin:$PATH"
-export RUST_SRC_PATH="$(echo $HOME/.multirust/toolchains/*/lib/rustlib/src/rust/src)"
-
-# composer
-export PATH="$PATH:$HOME/.composer/vendor/bin"
-
-# pyenv
-export PYENV_ROOT="/usr/local/var/pyenv"
-if which pyenv > /dev/null; then
-    eval "$(pyenv init -)";
-fi
-
-# go
-export GOPATH="$HOME/.go"
-export PATH=$PATH:$GOPATH/bin
-
-# nvm
-export NVM_DIR=$HOME/.nvm
-source $(brew --prefix nvm)/nvm.sh
-
-# android studio
-export ANDROID_PATH=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_PATH/tools
-export PATH=$PATH:$ANDROID_PATH/platform-tools
 
 # -------------------------------------
 # 環境変数
@@ -174,46 +151,6 @@ function vcs_prompt_info() {
 #RPROMPT="[%*]"
 
 RPROMPT=\$vcs_info_msg_0_
-
-# -------------------------------------
-# エイリアス
-# -------------------------------------
-
-# -n 行数表示, -I バイナリファイル無視, svn関係のファイルを無視
-#alias grep="grep --color -n -I --exclude='*.svn-*' --exclude='entries' --exclude='*/cache/*'"
-
-# ls
-#alias ls="ls -G" # color for darwin
-alias l="ls -la"
-
-# open mac only
-alias op='open -a'
-alias ops="open -a 'sublime text'"
-alias opv="open -a 'visual studio code'"
-# Git command
-alias gs="git status"
-alias gd="git diff"
-# Rails command
-alias be="bundle exec"
-# emacs command
-alias ei="emacs -nw"
-# tmux
-alias ts='tmux new -s'
-alias tks='tmux kill-session'
-alias tl='tmux ls'
-alias ta='tmux a'
-# exa command
-alias le="exa -l" # file view
-alias leg="exa -l --git" #git state view
-alias et="exa -T" #Tree view
-# docker-compose
-alias dc="docker-compose"
-# react-native
-alias reactn="react-native"
-
-# 2つ上、3つ上にも移動できるようにする
-alias ...='cd ../..'
-#alias ....='cd ../../..'
 
 # -------------------------------------
 # キーバインド

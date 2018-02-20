@@ -61,3 +61,28 @@ gitflow () {
     curl -sL https://raw.githubusercontent.com/hironeko/setUpShells/develop/gitflow_set.sh | sh
 }
 
+symlink_set () {
+    DOT_FILES=(
+        .zshrc
+        .spacemacs
+        .tmux.conf
+        .vimrc
+        .gemrc
+        package.json
+    )
+
+    for file in ${DOT_FILES[@]}; do
+        ln -sf $HOME/dotfiles/$file $HOME/$file
+    done
+
+    ln -nfs $HOME/dotfiles/.emacs.d $HOME/.emacs.d
+    
+    cat <<EOF
+    ########################
+    #                      #
+    #     done symlink     #
+    #                      #
+    ########################
+EOF
+
+}

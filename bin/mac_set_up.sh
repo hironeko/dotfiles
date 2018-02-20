@@ -48,9 +48,12 @@ CELLAR_NAME=(
 for cellar in ${CELLAR_NAME[@]}; do
   if brew list "$cellar" > /dev/null 2>&1; then
       echo "$cellar already installed.... skipping"
+      echo ""
   else
       echo "$cellar installing.... now"
+      echo ""
       brew install $cellar
+      echo ""
       echo "$cellar installing.... done"
   fi
 done
@@ -90,8 +93,6 @@ done
 
 brew cleanup
 brew cask cleanup
-
-#xcode-select --install
 
 echo ""
 cat <<EOF

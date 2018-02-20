@@ -5,7 +5,7 @@ RELEASE_FILE=/etc/os-release
 
 # set up for macOSX
 if [[ `uname` == "Darwin" ]]; then
-    # directoryの確認
+    # check directory
     if [[ -d $HOME/dotfiles ]]; then
         echo "done dotfiles"
     else
@@ -13,6 +13,7 @@ if [[ `uname` == "Darwin" ]]; then
         git clone --recursive https://github.com/hironeko/dotfiles.git $HOME/dotfiles
         . $HOME/dofiles/install/functions/functions.sh
         prezto_set
+        symlink_set
         spacemacs_set
     fi
 elif grep -e '^NAME="CentOS' $RELEASE_FILE >/dev/null; then

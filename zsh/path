@@ -1,0 +1,36 @@
+# path
+
+export PATH="/usr/local/sbin:$PATH"
+export PATH="$PATH:~/.local/bin"
+
+# ruby
+eval "$(rbenv init -)"
+
+# not use
+# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+# rust
+export PATH="$HOME/.cargo/bin:$PATH"
+export RUST_SRC_PATH="$(echo $HOME/.multirust/toolchains/*/lib/rustlib/src/rust/src)"
+
+# composer
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+
+# pyenv
+export PYENV_ROOT="/usr/local/var/pyenv"
+if which pyenv > /dev/null; then
+    eval "$(pyenv init -)";
+fi
+
+# go
+export GOPATH="$HOME/.go"
+export PATH=$PATH:$GOPATH/bin
+
+# nvm
+export NVM_DIR=$HOME/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
+# android studio
+export ANDROID_PATH=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_PATH/tools
+export PATH=$PATH:$ANDROID_PATH/platform-tools

@@ -1,0 +1,42 @@
+
+# alias
+
+# ls
+alias l="ls -la"
+
+# open mac only
+alias op='open -a'
+alias ops="open -a 'sublime text'"
+alias opv="open -a 'visual studio code'"
+
+# Git command
+alias gs="git status"
+alias gd="git diff"
+alias ga="git add"
+
+# Rails command
+alias be="bundle exec"
+
+# emacs command
+alias ei="emacs -nw"
+
+# tmux
+alias ts='tmux new -s'
+alias tks='tmux kill-session'
+alias tl='tmux ls'
+alias ta='tmux a'
+
+# exa command
+alias le="exa -l" # file view
+alias leg="exa -l --git" #git state view
+alias et="exa -T" #Tree view
+
+# docker-compose
+alias dc="docker-compose"
+
+# react-native
+alias reactn="react-native"
+
+# 2つ上に移動できるようにする
+alias ...='cd ../..'
+#alias ....='cd ../../..'
