@@ -17,13 +17,13 @@ fi
 # alias
 # -------------------------------------
 
-. $HOME/dotfiles/zsh/alias
+. $HOME/dotfiles/bin/alias
 
 # -------------------------------------
 # path
 # -------------------------------------
 
-. $HOME/dotfiles/zsh/path
+. $HOME/dotfiles/bin/path
 
 
 # -------------------------------------
