@@ -11,10 +11,10 @@ prezto_set () {
 
 EOF
 
-    . $HOME/dotfiles/bin/mac_set_up.sh
-    # TODO: set up for prezto
+    . $HOME/dotfiles/etc/mac.sh
+
     if [ $SHELL = "/bin/bash" ]; then
-        . $HOME/dotfiles/bin/prezto_set_up.sh
+        . $HOME/dotfiles/etc/prezto.sh
     else
         echo "done changed zsh"
     fi
@@ -42,7 +42,7 @@ spacemacs_set () {
 EOF
     # spacemacs clone
     if [ ! -e $HOME/.emacs.d/spacemacs.mk ]; then
-        . $HOME/dotfiles/bin/spacemacs_set_up.sh
+        . $HOME/dotfiles/etc/spacemacs.sh
     fi
     cat <<EOF
 
@@ -85,4 +85,10 @@ symlink_set () {
     ########################
 EOF
 
+}
+
+# how to
+# ! has some; then 
+has () {
+  type "$1" &> /dev/null ;
 }

@@ -3,7 +3,7 @@
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$PATH:~/.local/bin"
 
-# ruby
+# rbenv
 eval "$(rbenv init -)"
 
 # not use
