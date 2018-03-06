@@ -11,7 +11,7 @@ if [[ `uname` == "Darwin" ]]; then
     else
         echo "git cloning......."
         git clone --recursive https://github.com/hironeko/dotfiles.git $HOME/dotfiles
-        . $HOME/dofiles/install/functions/functions.sh
+        . $HOME/dotfiles/install/functions/functions.sh
         prezto_set
         symlink_set
         spacemacs_set
