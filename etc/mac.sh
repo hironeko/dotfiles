@@ -32,7 +32,7 @@ CELLAR_NAME=(
     pyenv
     go
     tree
-    php71
+    php72
     composer
     erlang
     elixir
@@ -41,7 +41,6 @@ CELLAR_NAME=(
     vim
     rbenv
     git-flow
-    battery
     tmux
 )
 

@@ -5,7 +5,7 @@ prezto_set () {
 
     #############################################
     #                                           #
-    #        prezto setup... satrt              #
+    #        prezto setup... start              #
     #                                           #
     #############################################
 
@@ -28,6 +28,8 @@ EOF
 
 EOF
 
+    exit 1
+
 }
 
 spacemacs_set () {
@@ -35,7 +37,7 @@ spacemacs_set () {
 
     #############################################
     #                                           #
-    #        spacemacs install ...satrt         #
+    #        spacemacs install ...start         #
     #                                           #
     #############################################
 
@@ -54,6 +56,8 @@ EOF
 
 EOF
     emacs --insecure
+
+    exit 1
 }
 
 # git-flow set up for linux
@@ -76,7 +80,6 @@ symlink_set () {
     done
 
     ln -nfs $HOME/dotfiles/.emacs.d $HOME/.emacs.d
-    
     cat <<EOF
     ########################
     #                      #
@@ -85,10 +88,11 @@ symlink_set () {
     ########################
 EOF
 
+    exit 1
 }
 
 # how to
-# ! has some; then 
+# ! has some; then
 has () {
   type "$1" &> /dev/null ;
 }

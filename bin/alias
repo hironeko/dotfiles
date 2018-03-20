@@ -39,3 +39,6 @@ alias reactn="react-native"
 # 2つ上に移動できるようにする
 alias ...='cd ../..'
 #alias ....='cd ../../..'
+
+# portのチェック
+alias lipL="lsof -i -P | grep 'LISTEN'"
