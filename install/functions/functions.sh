@@ -1,17 +1,18 @@
 #!/bin/bash
 
 prezto_set () {
+
+    . $HOME/dotfiles/etc/mac.sh
+
     cat <<EOF
 
     #############################################
     #                                           #
-    #        prezto setup... start              #
+    #        prezto setup... check              #
     #                                           #
     #############################################
 
 EOF
-
-    . $HOME/dotfiles/etc/mac.sh
 
     if [ $SHELL = "/bin/bash" ]; then
         . $HOME/dotfiles/etc/prezto.sh
@@ -27,8 +28,6 @@ EOF
     #############################################
 
 EOF
-
-    exit 1
 
 }
 
@@ -61,13 +60,8 @@ EOF
 EOF
     emacs --insecure
 
-    exit 1
 }
 
-# git-flow set up for linux
-gitflow () {
-    curl -sL https://raw.githubusercontent.com/hironeko/setUpShells/develop/gitflow_set.sh | sh
-}
 
 symlink_set () {
     DOT_FILES=(
@@ -92,7 +86,6 @@ symlink_set () {
     ########################
 EOF
 
-    exit 1
 }
 
 # how to
