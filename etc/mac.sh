@@ -6,6 +6,7 @@ if test ! $(which brew); then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 elif brew doctor > /dev/null 2>&1; then
     echo "done brew"
+    exit 1
 fi
 
 brew upgrade
