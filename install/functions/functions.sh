@@ -2,8 +2,6 @@
 
 prezto_set () {
 
-    . $HOME/dotfiles/etc/mac.sh
-
     cat <<EOF
 
     #############################################
@@ -42,12 +40,11 @@ spacemacs_set () {
 
 EOF
     # spacemacs clone
-    if [ ! -e $HOME/.emacs.d/spacemacs.mk ]; then
-        . $HOME/dotfiles/etc/spacemacs.sh
-    else
-        echo "done"
-        exit 1
-    fi
+    # if [ ! -e $HOME/.emacs.d/spacemacs.mk ]; then
+    . $HOME/dotfiles/etc/spacemacs.sh
+    # else
+        # echo "done"
+    # fi
 
     cat <<EOF
 
@@ -92,4 +89,20 @@ EOF
 # ! has some; then
 has () {
   type "$1" &> /dev/null ;
+}
+
+
+setup () {
+    
+    . $HOME/dotfiles/etc/mac.sh
+
+    if [ $SHELL = "/bin/bash" ]; then
+        . $HOME/dotfiles/etc/prezto.sh
+    fi
+
+    symlink_set
+    if [ ! -e $HOME/.emacs.d/spacemacs.mk ]; then
+       spacemacs_set 
+    fi
+
 }

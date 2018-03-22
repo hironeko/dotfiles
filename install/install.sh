@@ -3,18 +3,27 @@
 
 RELEASE_FILE=/etc/os-release
 
+cloneDotfiles() {
+    git clone --recursive https://github.com/hironeko/dotfiles.git $HOME/dotfiles
+}
+
 # set up for macOSX
 if [[ `uname` == "Darwin" ]]; then
     # check directory
     if [[ -d $HOME/dotfiles ]]; then
         echo "done dotfiles"
     else
+        echo ""
         echo "git cloning......."
-        git clone --recursive https://github.com/hironeko/dotfiles.git $HOME/dotfiles
+        echo ""
+        # git clone --recursive https://github.com/hironeko/dotfiles.git $HOME/dotfiles
+        cloneDotfiles
+        echo ""
+        echo "git clone done"
+        echo ""
+
         . $HOME/dotfiles/install/functions/functions.sh
-        prezto_set
-        symlink_set
-        spacemacs_set
+        setup
     fi
 elif grep -e '^NAME="CentOS' $RELEASE_FILE >/dev/null; then
     echo "CentOs"
