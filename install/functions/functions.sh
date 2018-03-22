@@ -45,7 +45,11 @@ EOF
     # spacemacs clone
     if [ ! -e $HOME/.emacs.d/spacemacs.mk ]; then
         . $HOME/dotfiles/etc/spacemacs.sh
+    else
+        echo "done"
+        exit 1
     fi
+
     cat <<EOF
 
     #############################################

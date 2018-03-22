@@ -8,6 +8,9 @@ if [[ `uname` == "Darwin" ]]; then
     # check directory
     if [[ -d $HOME/dotfiles ]]; then
         echo "done dotfiles"
+        . $HOME/dotfiles/install/functions/functions.sh
+        prezto_set
+        spacemacs_set
     else
         echo "git cloning......."
         git clone --recursive https://github.com/hironeko/dotfiles.git $HOME/dotfiles
