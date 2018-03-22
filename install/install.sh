@@ -12,6 +12,8 @@ if [[ `uname` == "Darwin" ]]; then
     # check directory
     if [[ -d $HOME/dotfiles ]]; then
         echo "done dotfiles"
+        . $HOME/dotfiles/install/functions/functions.sh
+        setup
     else
         echo ""
         echo "git cloning......."
