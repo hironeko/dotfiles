@@ -86,6 +86,7 @@ change shell done
 EOF
 
 chsh -s /bin/bash
+rm -rf $HOME/.z*
 
 echo "done"
 echo ""

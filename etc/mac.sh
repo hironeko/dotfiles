@@ -14,7 +14,6 @@ brew update
 
 # tap
 brew tap homebrew/php
-brew tap Goles/battery
 
 cat <<EOF
 
@@ -81,6 +80,7 @@ CASK_NAME=(
   vagrant
   virtualbox
   visual-studio-code
+  telegram
 )
 
 for cask in ${CASK_NAME[@]}; do
