@@ -1,31 +1,16 @@
 #!/bin/bash
 
+. $HOME/dotfiles/install/functions/functions.sh
 
-CELLAR_NAME=(
-    nvm
-    sqlite
-    git
-    pyenv
-    go
-    tree
-    php72
-    composer
-    postgresql
-    mysql
-    vim
-    rbenv
-    git-flow
-    tmux
-)
+CELLAR_NAME=$(brew list)
+CASK_NAME=$(brew cask list)
 
 for cellar in ${CELLAR_NAME[@]}; do
     if brew list "$cellar" > /dev/null 2>&1; then
         echo ""
+        echo ""
         echo "$cellar installed.... start unisntall"
-        echo ""
         brew uninstall $cellar
-        echo ""
-        echo ""
         echo "done"
         echo ""
         echo ""
@@ -37,27 +22,14 @@ for cellar in ${CELLAR_NAME[@]}; do
 done
 
 
-CASK_NAME=(
-    clipy
-    alfred
-    docker
-    emacs
-    google-chrome
-    dropbox
-    iterm2
-    slack
-    quip
-    vagrant
-    virtualbox
-    visual-studio-code
-)
-
 for cask in ${CASK_NAME[@]}; do
     if brew cask list "$cask" > /dev/null 2>&1; then
         echo ""
         echo ""
         echo "$cask installed.... start uninstall"
         brew cask uninstall $cask
+        echo "done"
+        echo ""
         echo ""
     else
         echo ""
@@ -74,6 +46,17 @@ brew cask cleanup
 
 rm -rf $HOME/.zprezto
 
+echo ""
+cat <<EOF
+
+***************************
+
+symlink unlink
+
+***************************
+
+EOF
+
 DOT_FILES=(
   .zshrc
   .spacemacs
@@ -88,6 +71,39 @@ for file in ${DOT_FILES[@]}; do
 done
 
 unlink $HOME/.emacs.d
+
+chsh -s /bin/bash
+
+echo ""
+cat <<EOF
+
+***************************
+
+change shell done
+
+***************************
+
+EOF
+
+chsh -s /bin/bash
+
+echo "done"
+echo ""
+
+cat <<EOF
+
+***************************
+
+uninstall brew
+
+***************************
+
+EOF
+
+if has $(which brew); then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
+fi
+
 
 echo ""
 cat <<EOF
