@@ -23,7 +23,7 @@ for cellar in ${CELLAR_NAME[@]}; do
         echo ""
         echo "$cellar installed.... start unisntall"
         echo ""
-        brew unistall $cellar
+        brew uninstall $cellar
         echo ""
         echo ""
         echo "done"
@@ -57,7 +57,7 @@ for cask in ${CASK_NAME[@]}; do
         echo ""
         echo ""
         echo "$cask installed.... start uninstall"
-        brew cask unistall $cask
+        brew cask uninstall $cask
         echo ""
     else
         echo ""
