@@ -11,7 +11,7 @@ eval "$(rbenv init -)"
 
 # rust
 export PATH="$HOME/.cargo/bin:$PATH"
-export RUST_SRC_PATH="$(echo $HOME/.multirust/toolchains/*/lib/rustlib/src/rust/src)"
+#export RUST_SRC_PATH="$(echo $HOME/.multirust/toolchains/*/lib/rustlib/src/rust/src)"
 
 # composer
 export PATH="$PATH:$HOME/.composer/vendor/bin"
