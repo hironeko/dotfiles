@@ -84,10 +84,10 @@ DOT_FILES=(
 )
 
 for file in ${DOT_FILES[@]}; do
-  unlink -sf $HOME/dotfiles/$file $HOME/$file
+  unlink $HOME/$file
 done
 
-unlink -nfs $HOME/dotfiles/.emacs.d $HOME/.emacs.d
+unlink $HOME/.emacs.d
 
 echo ""
 cat <<EOF
