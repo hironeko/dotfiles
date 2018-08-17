@@ -47,8 +47,11 @@ export VISUAL=/usr/local/bin/vim
 # -------------------------------------
 
 ## 補完機能の強化
-autoload -U compinit
+autoload -Uz compinit
 compinit
+setopt auto_list
+setopt auto_menu
+zstyle ":completion:*" menu select
 
 ## 入力しているコマンド名が間違っている場合にもしかして：を出す。
 setopt correct
@@ -61,6 +64,8 @@ setopt prompt_subst
 
 ## ^Dでログアウトしない。
 setopt ignoreeof
+
+setopt complete_in_word
 
 ## バックグラウンドジョブが終了したらすぐに知らせる。
 setopt no_tify
@@ -185,20 +190,10 @@ function title {
 #   echo -n ""
 # }
 
-# histroy
 #ヒストリーサイズ設定
 # history size setting
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
-# 直前のコマンドは追加しない
-setopt hist_ignore_dups
-# コマンド履歴の呼び出し
-autoload -Uz history-search-end
-# other tab history saher
 setopt share_history
-##
 
-#if (which zprof > /dev/null 2>&1) ;then
-#  zprof
-#fi
