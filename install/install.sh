@@ -7,25 +7,27 @@ cloneDotfiles() {
     git clone --recursive https://github.com/hironeko/dotfiles.git $HOME/dotfiles
 }
 
+setUp () {
+    . $HOME/dotfiles/install/functions/functions.sh
+    setup
+}
+
 # set up for macOSX
 if [[ `uname` == "Darwin" ]]; then
     # check directory
     if [[ -d $HOME/dotfiles ]]; then
-        echo "done dotfiles"
-        . $HOME/dotfiles/install/functions/functions.sh
-        setup
+        echo "already exits dir"
+        echo "set up start"
+        setUp
     else
-        echo ""
-        echo "git cloning......."
-        echo ""
-        # git clone --recursive https://github.com/hironeko/dotfiles.git $HOME/dotfiles
+        cat <<EOF
+            git cloning.......
+EOF
         cloneDotfiles
-        echo ""
-        echo "git clone done"
-        echo ""
-
-        . $HOME/dotfiles/install/functions/functions.sh
-        setup
+        cat <<EOF
+            git clone done & set up start
+EOF
+        setUp
     fi
 elif grep -e '^NAME="CentOS' $RELEASE_FILE >/dev/null; then
     echo "CentOs"

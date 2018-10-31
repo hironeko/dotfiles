@@ -34,3 +34,6 @@ source $(brew --prefix nvm)/nvm.sh
 export ANDROID_PATH=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_PATH/tools
 export PATH=$PATH:$ANDROID_PATH/platform-tools
+
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+export DYLD_LIBRARY_PATH="/usr/local/opt/mysql@5.6/:${DYLD_LIBRARY_PATH}"

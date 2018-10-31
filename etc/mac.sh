@@ -4,16 +4,12 @@ if test ! $(which brew); then
     echo "Installing Homebrew for your PC."
     xcode-select --install
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-# elif brew doctor > /dev/null 2>&1; then
 else
     echo "done brew"
 fi
 
 brew upgrade
 brew update
-
-# tap
-brew tap homebrew/php
 
 cat <<EOF
 
@@ -34,8 +30,6 @@ CELLAR_NAME=(
     tree
     php72
     composer
-    erlang
-    elixir
     postgresql
     mysql
     vim
@@ -49,11 +43,11 @@ for cellar in ${CELLAR_NAME[@]}; do
       echo "$cellar already installed.... skipping"
       echo ""
   else
-      echo "$cellar installing.... now"
+      echo "$cellar installing.... "
       echo ""
       brew install $cellar
       echo ""
-      echo "$cellar installing.... done"
+      echo "$cellar done"
   fi
 done
 
@@ -94,7 +88,6 @@ done
 brew cleanup
 brew cask cleanup
 
-echo ""
 cat <<EOF
 
 ****************************

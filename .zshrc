@@ -35,8 +35,8 @@ export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # エディタ
-export EDITOR=/usr/local/bin/vim
-export VISUAL=/usr/local/bin/vim
+#export EDITOR=/usr/local/bin/vim
+#export VISUAL=/usr/local/bin/vim
 # ページャ
 #export PAGER=/usr/local/bin/vimpager
 #export MANPAGER=/usr/local/bin/vimpager
@@ -71,8 +71,6 @@ setopt complete_in_word
 setopt no_tify
 
 # 補完
-## タブによるファイルの順番切り替えをしない
-unsetopt auto_menu
 
 # cd -[tab]で過去のディレクトリにひとっ飛びできるようにする
 setopt auto_pushd
@@ -146,7 +144,6 @@ function vcs_prompt_info() {
     psvar=()
     LANG=en_US.UTF-8 vcs_info
     [[ -n "$vcs_info_msg_0_" ]] && echo -n " %{$fg[yellow]%}$vcs_info_msg_0_%f"
-    #[[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 # end VCS
 

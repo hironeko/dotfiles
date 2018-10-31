@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DOTPATH=$HOME/dotfiles
+
 prezto_set () {
 
     cat <<EOF
@@ -13,9 +15,9 @@ prezto_set () {
 EOF
 
     if [ $SHELL = "/bin/bash" ]; then
-        . $HOME/dotfiles/etc/prezto.sh
+        . $DOTPATH/etc/prezto.sh
     else
-        echo "done changed zsh"
+        echo "alredy changed zsh"
     fi
     cat <<EOF
 
@@ -26,7 +28,7 @@ EOF
     #############################################
 
 EOF
-
+    return 0
 }
 
 spacemacs_set () {
@@ -41,7 +43,7 @@ spacemacs_set () {
 EOF
     # spacemacs clone
     # if [ ! -e $HOME/.emacs.d/spacemacs.mk ]; then
-    . $HOME/dotfiles/etc/spacemacs.sh
+    . $DOTPATH/etc/spacemacs.sh
     # else
         # echo "done"
     # fi
@@ -71,10 +73,10 @@ symlink_set () {
     )
 
     for file in ${DOT_FILES[@]}; do
-        ln -sf $HOME/dotfiles/$file $HOME/$file
+        ln -sf $DOTPATH/$file $HOME/$file
     done
 
-    ln -nfs $HOME/dotfiles/.emacs.d $HOME/.emacs.d
+    ln -nfs $DOTPATH/.emacs.d $HOME/.emacs.d
     cat <<EOF
     ########################
     #                      #
@@ -82,7 +84,7 @@ symlink_set () {
     #                      #
     ########################
 EOF
-
+    return 0
 }
 
 # how to
@@ -94,11 +96,9 @@ has () {
 
 setup () {
     
-    . $HOME/dotfiles/etc/mac.sh
+    . $DOTPATH/etc/mac.sh
 
-    if [ $SHELL = "/bin/bash" ]; then
-        . $HOME/dotfiles/etc/prezto.sh
-    fi
+    prezto_set
 
     symlink_set
     
