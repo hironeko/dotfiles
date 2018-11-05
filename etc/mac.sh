@@ -23,14 +23,11 @@ EOF
 
 CELLAR_NAME=(
     nvm
-    sqlite
     git
     pyenv
     go
     tree
-    php72
     composer
-    postgresql
     mysql
     vim
     rbenv
@@ -74,7 +71,6 @@ CASK_NAME=(
   vagrant
   virtualbox
   visual-studio-code
-  telegram
 )
 
 for cask in ${CASK_NAME[@]}; do

@@ -12,6 +12,10 @@ alias opv="open -a 'visual studio code'"
 alias gs="git status"
 alias gd="git diff"
 alias ga="git add"
+alias g-p-r="git pull --rebase"
+
+# PHP for laravel and lumen
+alias artisan="php artisan"
 
 # Rails command
 alias be="bundle exec"
@@ -32,6 +36,7 @@ alias et="exa -T" #Tree view
 
 # docker-compose
 alias dc="docker-compose"
+alias dce="docker-compose exec"
 
 # react-native
 alias reactn="react-native"
