@@ -24,15 +24,16 @@ EOF
 CELLAR_NAME=(
     nvm
     git
-    pyenv
     go
     tree
     composer
     mysql
     vim
-    rbenv
     git-flow
     tmux
+    tig
+    hub
+    anyenv
 )
 
 for cellar in ${CELLAR_NAME[@]}; do
