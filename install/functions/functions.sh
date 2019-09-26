@@ -102,8 +102,8 @@ setup () {
 
     symlink_set
     
-    if [ ! -e $HOME/.emacs.d/spacemacs.mk ]; then
-        spacemacs_set
-    fi
+    #if [ ! -e $HOME/.emacs.d/spacemacs.mk ]; then
+    #    spacemacs_set
+    #fi
 
 }

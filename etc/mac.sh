@@ -67,6 +67,7 @@ CASK_NAME=(
   google-chrome
   dropbox
   iterm2
+  hyper
   slack
   quip
   vagrant
