@@ -73,6 +73,7 @@ CASK_NAME=(
   #vagrant
   #virtualbox
   visual-studio-code
+  boostnote
 )
 
 for cask in ${CASK_NAME[@]}; do
