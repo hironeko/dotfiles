@@ -63,15 +63,15 @@ CASK_NAME=(
   clipy
   alfred
   docker
-  emacs
+  #emacs
   google-chrome
   dropbox
-  iterm2
+  #iterm2
   hyper
   slack
   quip
-  vagrant
-  virtualbox
+  #vagrant
+  #virtualbox
   visual-studio-code
 )
 
