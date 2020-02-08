@@ -36,8 +36,8 @@ export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # エディタ
-#export EDITOR=/usr/local/bin/vim
-#export VISUAL=/usr/local/bin/vim
+export EDITOR=vim
+export VISUAL=vim
 # ページャ
 #export PAGER=/usr/local/bin/vimpager
 #export MANPAGER=/usr/local/bin/vimpager
@@ -193,4 +193,3 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 setopt share_history
-

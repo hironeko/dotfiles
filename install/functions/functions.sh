@@ -65,7 +65,7 @@ EOF
 symlink_set () {
     DOT_FILES=(
         .zshrc
-        .spacemacs
+        # .spacemacs
         .tmux.conf
         .vimrc
         .gemrc

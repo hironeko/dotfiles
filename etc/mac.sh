@@ -27,7 +27,7 @@ CELLAR_NAME=(
     go
     tree
     composer
-    mysql
+    # mysql
     vim
     git-flow
     tmux
@@ -74,6 +74,7 @@ CASK_NAME=(
   #virtualbox
   visual-studio-code
   boostnote
+  fork
 )
 
 for cask in ${CASK_NAME[@]}; do

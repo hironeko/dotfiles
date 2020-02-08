@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: default
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: hironeko
+      MYSQL_PASSWORD: neko
+      TZ: "Asia/Tokyo"
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d
+      - ./conf.d:/etc/mysql/conf.d
+      - ./data/mysql:/var/lib/mysql
+    tty: true
