@@ -14,7 +14,8 @@ export PATH="$PATH:$HOME/.composer/vendor/bin"
 
 # go
 export GOPATH="$HOME/.go"
-export PATH=$PATH:$GOPATH/bin
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
 
 # nvm
 export NVM_DIR=$HOME/.nvm

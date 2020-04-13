@@ -75,6 +75,7 @@ CASK_NAME=(
   visual-studio-code
   boostnote
   fork
+  jasper
 )
 
 for cask in ${CASK_NAME[@]}; do
