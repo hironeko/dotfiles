@@ -49,6 +49,8 @@ for cellar in ${CELLAR_NAME[@]}; do
   fi
 done
 
+anyenv install --init
+
 cat <<EOF
 
 ############################################
