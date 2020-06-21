@@ -1,16 +1,5 @@
-# -------------------------------------
-# zpreztoの設定を読み込む
-# bashに記載ある環境変数を使用する
-# -------------------------------------
-
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
-# Ensure that a non-login, non-interactive shell has a defined environment.
-if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprofile"
-fi
+eval "$(starship init zsh)"
+eval "$(anyenv init - --no-rehash)"
 
 # -------------------------------------
 # alias

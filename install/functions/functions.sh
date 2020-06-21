@@ -93,12 +93,18 @@ has () {
   type "$1" &> /dev/null ;
 }
 
+starship_set() {
+    curl -fsSL https://starship.rs/install.sh | bash
+    exec $SHELL -l
+}
 
 setup () {
     
     . $DOTPATH/etc/mac.sh
 
-    prezto_set
+    # prezto_set
+
+    starship_set
 
     symlink_set
     
