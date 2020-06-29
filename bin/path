@@ -32,3 +32,5 @@ export DYLD_LIBRARY_PATH="/usr/local/opt/mysql@5.6/:${DYLD_LIBRARY_PATH}"
 # anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
 
+# denon
+export PATH="$HOME/.deno/bin:$PATH"

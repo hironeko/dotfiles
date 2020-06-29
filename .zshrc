@@ -1,14 +1,24 @@
-eval "$(starship init zsh)"
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Ensure that a non-login, non-interactive shell has a defined environment.
+if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprofile"
+fi
+
+# starshipコメントアウト
+#eval "$(starship init zsh)"
 eval "$(anyenv init - --no-rehash)"
 
 # -------------------------------------
-# alias
+# alias の読み込み
 # -------------------------------------
 
 . $HOME/dotfiles/bin/alias
 
 # -------------------------------------
-# path
+# path の読み込み
 # -------------------------------------
 
 . $HOME/dotfiles/bin/path
@@ -46,7 +56,7 @@ zstyle ":completion:*" menu select
 setopt correct
 
 # ビープを鳴らさない
-setopt nobeep
+setopt no_beep
 
 ## 色を使う
 setopt prompt_subst
