@@ -27,13 +27,14 @@ CELLAR_NAME=(
     go
     tree
     composer
-    # mysql
     vim
     git-flow
     tmux
     tig
     hub
     anyenv
+	deno
+	git-secret
 )
 
 for cellar in ${CELLAR_NAME[@]}; do
@@ -68,16 +69,17 @@ CASK_NAME=(
   #emacs
   google-chrome
   dropbox
-  #iterm2
-  hyper
+  iterm
   slack
   quip
-  #vagrant
-  #virtualbox
+  vagrant
+  virtualbox
   visual-studio-code
-  boostnote
+  #boostnote
   fork
-  jasper
+  #jasper
+  sequel-pro
+  dicord
 )
 
 for cask in ${CASK_NAME[@]}; do
