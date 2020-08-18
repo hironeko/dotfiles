@@ -35,6 +35,10 @@ CELLAR_NAME=(
     anyenv
 	deno
 	git-secret
+	helm
+	awscli
+	kubectl
+	skaffold
 )
 
 for cellar in ${CELLAR_NAME[@]}; do

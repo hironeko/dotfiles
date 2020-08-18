@@ -23,6 +23,11 @@ eval "$(anyenv init - --no-rehash)"
 
 . $HOME/dotfiles/bin/path
 
+#--------------------------------------
+# phpenv のため
+#--------------------------------------
+
+# . $HOME/dotfiles/bin/phpenv_build_path
 
 #--------
 # ssh
@@ -192,3 +197,8 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 setopt share_history
+
+# phpenv version 7.4系を入れるため
+export PKG_CONFIG_PATH="$(brew --prefix krb5)/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig:$PKG_CONFIG_PATH"

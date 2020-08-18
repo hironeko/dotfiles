@@ -52,3 +52,6 @@ alias ...='cd ../..'
 
 # portのチェック
 alias lipL="lsof -i -P | grep 'LISTEN'"
+
+# terraform
+alias tf="terraform"
