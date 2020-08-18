@@ -40,9 +40,6 @@ alias et="exa -T" #Tree view
 alias dc="docker-compose"
 alias dce="docker-compose exec"
 
-# kubernetes
-alias k="kubectl"
-
 # react-native
 alias reactn="react-native"
 
