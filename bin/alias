@@ -55,3 +55,12 @@ alias lipL="lsof -i -P | grep 'LISTEN'"
 
 # terraform
 alias tf="terraform"
+
+# saml2aws
+alias s2a="saml2aws login -a"
+
+# kubectl
+alias k8s="kubectl"
+
+# aws samle connect
+alias saml2-login-saml-ab-developer="saml2aws login -a saml-ab-developer"
