@@ -34,3 +34,18 @@ export PATH="$HOME/.anyenv/bin:$PATH"
 
 # denon
 export PATH="$HOME/.deno/bin:$PATH"
+
+
+eval "$(anyenv init -)"
+
+# kubernetes
+# kubectl
+source <(kubectl completion zsh)
+
+# phpenv version 7.4系を入れるため
+export PKG_CONFIG_PATH="$(brew --prefix krb5)/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig:$PKG_CONFIG_PATH"
+# mysql5.7
+export PATH="/usr/local/opt/mysql-client@5.7/bin:$PATH"
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"

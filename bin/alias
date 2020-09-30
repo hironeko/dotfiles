@@ -40,9 +40,6 @@ alias et="exa -T" #Tree view
 alias dc="docker-compose"
 alias dce="docker-compose exec"
 
-# kubernetes
-alias k="kubectl"
-
 # react-native
 alias reactn="react-native"
 
@@ -55,3 +52,12 @@ alias lipL="lsof -i -P | grep 'LISTEN'"
 
 # terraform
 alias tf="terraform"
+
+# saml2aws
+alias s2a="saml2aws login -a"
+
+# kubectl
+alias k8s="kubectl"
+
+# aws samle connect
+alias saml2-login-saml-ab-developer="saml2aws login -a saml-ab-developer"
