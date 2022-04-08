@@ -22,7 +22,9 @@ export NVM_DIR=$HOME/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
 # android studio
-# export ANDROID_PATH=$HOME/Library/Android/sdk
+
+# export ANDROID_SDK_ROOT=“/usr/local/share/android-sdk”
+#export 
 # export PATH=$PATH:$ANDROID_PATH/tools
 # export PATH=$PATH:$ANDROID_PATH/platform-tools
 
@@ -31,6 +33,8 @@ source $(brew --prefix nvm)/nvm.sh
 
 # anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
+
+export PATH=~/.rbenv/bin:$PATH
 
 # denon
 export PATH="$HOME/.deno/bin:$PATH"
@@ -49,3 +53,6 @@ export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig:$PKG_CONFIG_PATH"
 # mysql5.7
 export PATH="/usr/local/opt/mysql-client@5.7/bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+
+# openssl
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"

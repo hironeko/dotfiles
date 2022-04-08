@@ -28,17 +28,17 @@ CELLAR_NAME=(
     tree
     composer
     vim
-    git-flow
+    #git-flow
     tmux
     tig
     hub
     anyenv
 	deno
-	git-secret
-	helm
-	awscli
-	kubectl
-	skaffold
+    git-secret
+	#helm
+    awscli
+	#kubectl
+    #skaffold
 )
 
 for cellar in ${CELLAR_NAME[@]}; do
@@ -76,26 +76,28 @@ CASK_NAME=(
   iterm
   slack
   quip
-  vagrant
-  virtualbox
+  #vagrant
+  #virtualbox
   visual-studio-code
   #boostnote
-  fork
+  #fork
   #jasper
   sequel-pro
   dicord
 )
 
 for cask in ${CASK_NAME[@]}; do
-  if brew cask list "$cask" > /dev/null 2>&1; then
+#   if brew cask list "$cask" > /dev/null 2>&1; then
+  if brew list "$cask" > /dev/null 2>&1; then
       echo "$cask already installed.... skipping"
   else
-      brew cask install $cask
+    #   brew cask install $cask
+      brew install $cask
   fi
 done
 
 brew cleanup
-brew cask cleanup
+#brew cask cleanup
 
 cat <<EOF
 

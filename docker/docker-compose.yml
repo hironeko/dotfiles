@@ -7,7 +7,7 @@ services:
       MYSQL_DATABASE: default
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: hironeko
-      MYSQL_PASSWORD: neko
+      MYSQL_PASSWORD: hironeko
       TZ: "Asia/Tokyo"
     ports:
       - 3306:3306

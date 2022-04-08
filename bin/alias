@@ -47,7 +47,7 @@ alias reactn="react-native"
 alias ...='cd ../..'
 #alias ....='cd ../../..'
 
-# portのチェック
+# 使用されているportのチェック
 alias lipL="lsof -i -P | grep 'LISTEN'"
 
 # terraform
@@ -61,3 +61,6 @@ alias k8s="kubectl"
 
 # aws samle connect
 alias saml2-login-saml-ab-developer="saml2aws login -a saml-ab-developer"
+
+# プロセスツリーの表示
+alias ps-t="ps -e f" 

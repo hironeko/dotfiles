@@ -1,0 +1,18 @@
+export PATH="/usr/local/opt/bison/bin:$PATH"
+export PATH="/usr/local/opt/libxml2/bin:$PATH"
+export PATH="/usr/local/opt/bzip2/bin:$PATH"
+export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="/usr/local/opt/libiconv/bin:$PATH"
+export PATH="/usr/local/opt/krb5/bin:$PATH"
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+export PATH="/usr/local/opt/icu4c/bin:$PATH"
+
+# export PATH="$(brew --prefix bison)/bin:$PATH"
+# export PATH="$(brew --prefix libxml2)/bin:$PATH"
+# export PATH="$(brew --prefix bzip2)/bin:$PATHi"
+# export PATH="$(brew --prefix curl)/bin:$PATH"
+# export PATH="$(brew --prefix libiconv)/bin:$PATH"
+# export PATH="$(brew --prefix krb5)/bin:$PATH"
+# export PATH="$(brew --prefix openssl@1.1)/bin:$PATH"
+# export PATH="$(brew --prefix icu4c)/bin:$PATH"
+

@@ -58,3 +58,5 @@ set ignorecase
 set wrapscan
 "検索結果をhighlight
 set hlsearch
+
+
