@@ -7,6 +7,9 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
     source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
+# M1
+# eval $(/opt/homebrew/bin/brew shellenv)
+
 # starshipコメントアウト
 #eval "$(starship init zsh)"
 eval "$(anyenv init - --no-rehash)"
@@ -188,22 +191,12 @@ function title {
     echo -ne "\033]0;"$*"\007"
 }
 
-### リンゴマーク出すための関数
-# function toon {
-#   echo -n ""
-# }
-
 #ヒストリーサイズ設定
 # history size setting
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 setopt share_history
-
-# phpenv version 7.4系を入れるため
-export PKG_CONFIG_PATH="$(brew --prefix krb5)/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 #pecoでhistory検索
 function peco-select-history() {

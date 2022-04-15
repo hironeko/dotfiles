@@ -44,15 +44,33 @@ eval "$(anyenv init -)"
 
 # kubernetes
 # kubectl
-source <(kubectl completion zsh)
+#source <(kubectl completion zsh)
 
-# phpenv version 7.4系を入れるため
+# phpenvため
 export PKG_CONFIG_PATH="$(brew --prefix krb5)/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig:$PKG_CONFIG_PATH"
-# mysql5.7
-export PATH="/usr/local/opt/mysql-client@5.7/bin:$PATH"
-export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+export PKG_CONFIG_PATH="$(brew --prefix krb5)/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="$(brew --prefix libjpeg)/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="$(brew --prefix libedit)/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="$(brew --prefix tidy-html5)/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+export PATH="$(brew --prefix bison)/bin:$PATH"
+export PATH="$(brew --prefix bison)/bin:$PATH"
+export PATH="$(brew --prefix libxml2)/bin:$PATH"
+export PATH="$(brew --prefix bzip2)/bin:$PATH"
+export PATH="$(brew --prefix curl)/bin:$PATH"
+export PATH="$(brew --prefix libiconv)/bin:$PATH"
+export PATH="$(brew --prefix krb5)/bin:$PATH"
+export PATH="$(brew --prefix openssl@1.1)/bin:$PATH"
+export PATH="$(brew --prefix icu4c)/bin:$PATH"
+export PATH="$(brew --prefix tidy-html5)/lib:$PATH"
+
+export PHP_RPATHS="/opt/homebrew/opt/zlib/lib /opt/homebrew/opt/bzip2/lib /opt/homebrew/opt/curl/lib /opt/homebrew/opt/libiconv/lib /opt/homebrew/opt/libedit/lib"
+export PHP_BUILD_CONFIGURE_OPTS="--with-bz2=$(brew --prefix bzip2) --with-iconv=$(brew --prefix libiconv) --with-tidy=$(brew --prefix tidy-html5) --with-external-pcre=$(brew --prefix pcre2) --with-zip --enable-intl --with-pear"
 
 # openssl
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+
