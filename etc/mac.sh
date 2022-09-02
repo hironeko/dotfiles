@@ -37,6 +37,7 @@ CELLAR_NAME=(
     awscli
     peco
     bat
+    lazygit
 )
 
 for cellar in ${CELLAR_NAME[@]}; do

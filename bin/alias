@@ -64,3 +64,6 @@ alias saml2-login-saml-ab-developer="saml2aws login -a saml-ab-developer"
 
 # プロセスツリーの表示
 alias ps-t="ps -e f" 
+
+# lazygitのalias
+alias lgit="lazygit"

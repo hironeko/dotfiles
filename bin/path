@@ -34,8 +34,6 @@ source $(brew --prefix nvm)/nvm.sh
 # anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
 
-export PATH=~/.rbenv/bin:$PATH
-
 # denon
 export PATH="$HOME/.deno/bin:$PATH"
 

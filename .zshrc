@@ -8,7 +8,7 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
 fi
 
 # M1
-# eval $(/opt/homebrew/bin/brew shellenv)
+eval $(/opt/homebrew/bin/brew shellenv)
 
 # starshipコメントアウト
 #eval "$(starship init zsh)"
