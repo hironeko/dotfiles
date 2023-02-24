@@ -67,7 +67,6 @@ symlink_set () {
         .zshrc
         .tmux.conf
         .vimrc
-        .gemrc
         package.json
     )
 
