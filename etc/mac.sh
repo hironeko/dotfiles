@@ -86,6 +86,10 @@ done
 brew cleanup
 #brew cask cleanup
 
+# install volta
+curl https://get.volta.sh | bash
+volta setup
+
 cat <<EOF
 
 ****************************

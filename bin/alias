@@ -66,3 +66,6 @@ alias ps-t="ps -e f"
 
 # lazygitのalias
 alias lgit="lazygit"
+
+# aws-vault関連のalias
+alias ave="aws-vault exec"

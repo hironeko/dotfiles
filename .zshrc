@@ -14,7 +14,7 @@ eval $(/opt/homebrew/bin/brew shellenv)
 #eval "$(starship init zsh)"
 eval "$(anyenv init - --no-rehash)"
 
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 
 # -------------------------------------
 # alias の読み込み
@@ -210,3 +210,5 @@ bindkey '^r' peco-select-history
 
 eval "$(ssh-agent -s)"
 ssh-add --apple-use-keychain
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
