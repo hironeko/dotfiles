@@ -68,7 +68,6 @@ CASK_NAME=(
   docker
   google-chrome
   slack
-  quip
   visual-studio-code
   raycast
   fig
