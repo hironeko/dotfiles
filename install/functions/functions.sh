@@ -65,7 +65,6 @@ EOF
 symlink_set () {
     DOT_FILES=(
         .zshrc
-        # .spacemacs
         .tmux.conf
         .vimrc
         .gemrc
@@ -76,7 +75,6 @@ symlink_set () {
         ln -sf $DOTPATH/$file $HOME/$file
     done
 
-    ln -nfs $DOTPATH/.emacs.d $HOME/.emacs.d
     cat <<EOF
     ########################
     #                      #

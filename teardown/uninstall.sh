@@ -59,7 +59,6 @@ EOF
 
 DOT_FILES=(
   .zshrc
-  .spacemacs
   .tmux.conf
   .vimrc
   .gemrc
@@ -70,7 +69,6 @@ for file in ${DOT_FILES[@]}; do
   unlink $HOME/$file
 done
 
-unlink $HOME/.emacs.d
 
 chsh -s /bin/bash
 
