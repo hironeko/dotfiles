@@ -34,16 +34,7 @@ eval "$(anyenv init - --no-rehash)"
 
 # . $HOME/dotfiles/bin/phpenv_build_path
 
-#--------
-# ssh
-#--------
-
-ssh-add -K
-
-# SSHで接続した先で日本語が使えるようにする
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
+#
 # エディタ
 export EDITOR=vim
 export VISUAL=vim
@@ -130,21 +121,6 @@ if is-at-least 4.3.10; then
     zstyle ":vcs_info:git:*" unstagedstr "%F{magenta} ✖"
     zstyle ":vcs_info:git:*" formats "%F{cyan}(%b)%c%u%f"
     zstyle ":vcs_info:git:*" actionformats "(%s)-[%b|%a]%c%u"
-    # Set git-info parameters.
-    #zstyle ':prezto:module:git:info' verbose 'yes'
-    #zstyle ':prezto:module:git:info:action' format '%F{7}:%f%%B%F{9}%s%f%%b'
-    #zstyle ':prezto:module:git:info:added' format ' %%B%F{2}✚%f%%b'
-    #zstyle ':prezto:module:git:info:ahead' format ' %%B%F{13}⬆%f%%b'
-    #zstyle ':prezto:module:git:info:behind' format ' %%B%F{13}⬇%f%%b'
-    #zstyle ':prezto:module:git:info:branch' format ' %%B%F{2}%b%f%%b'
-    #zstyle ':prezto:module:git:info:commit' format ' %%B%F{3}%.7c%f%%b'
-    #zstyle ':prezto:module:git:info:deleted' format ' %%B%F{1}✖%f%%b'
-    #zstyle ':prezto:module:git:info:modified' format ' %%B%F{4}✱%f%%b'
-    #zstyle ':prezto:module:git:info:position' format ' %%B%F{13}%p%f%%b'
-    #zstyle ':prezto:module:git:info:renamed' format ' %%B%F{5}➜%f%%b'
-    #zstyle ':prezto:module:git:info:stashed' format ' %%B%F{6}✭%f%%b'
-    #zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{3}═%f%%b'
-    #zstyle ':prezto:module:git:info:untracked' format ' %%B%F{7}◼%f%%b'
 fi
 
 precmd(){ vcs_info }
@@ -208,7 +184,7 @@ zle -N peco-select-history
 bindkey '^r' peco-select-history
 
 
-eval "$(ssh-agent -s)"
-ssh-add --apple-use-keychain
+# eval "$(ssh-agent -s)"
+# ssh-add --apple-use-keychain
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
