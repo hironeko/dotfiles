@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo rm -rf /Library/Developer/CommandLineTools
+
 xcode-select --install
 
 if test ! $(which brew); then
