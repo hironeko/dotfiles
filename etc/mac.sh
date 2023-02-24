@@ -70,7 +70,9 @@ CASK_NAME=(
   slack
   quip
   visual-studio-code
-  dicord
+  raycast
+  fig
+#   dicord
 )
 
 for cask in ${CASK_NAME[@]}; do

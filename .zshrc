@@ -1,11 +1,11 @@
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+# if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+#   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+# fi
 
-# Ensure that a non-login, non-interactive shell has a defined environment.
-if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
-    source "${ZDOTDIR:-$HOME}/.zprofile"
-fi
+# # Ensure that a non-login, non-interactive shell has a defined environment.
+# if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+#     source "${ZDOTDIR:-$HOME}/.zprofile"
+# fi
 
 # M1
 eval $(/opt/homebrew/bin/brew shellenv)

@@ -102,7 +102,7 @@ setup () {
     
     . $DOTPATH/etc/mac.sh
 
-    prezto_set
+    # prezto_set
 
     #starship_set
 
