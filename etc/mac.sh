@@ -25,7 +25,7 @@ CELLAR_NAME=(
     git
     go
     tree
-    composer
+    # composer
     vim
     tmux
     tig
