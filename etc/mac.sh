@@ -1,8 +1,5 @@
 #!/bin/bash
 
-
-xcode-select --install
-
 if test ! $(which brew); then
     echo "Installing Homebrew for your PC."
     xcode-select --install

@@ -61,7 +61,6 @@ DOT_FILES=(
   .zshrc
   .tmux.conf
   .vimrc
-  .gemrc
   package.json
 )
 
