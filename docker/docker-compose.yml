@@ -11,7 +11,7 @@ services:
       MYSQL_PASSWORD: hironeko
       TZ: "Asia/Tokyo"
     ports:
-      - 3306:3306
+      - 3006:3306
     volumes:
       - ./mysql:/docker-entrypoint-initdb.d
       - ./conf.d:/etc/mysql/conf.d

@@ -22,7 +22,6 @@ cat <<EOF
 EOF
 
 CELLAR_NAME=(
-    nvm
     git
     go
     tree
@@ -30,9 +29,8 @@ CELLAR_NAME=(
     vim
     tmux
     tig
-    hub
     anyenv
-    deno
+    # deno
     git-secret
     awscli
     peco
@@ -67,21 +65,11 @@ EOF
 
 CASK_NAME=(
   clipy
-  alfred
   docker
-  #emacs
   google-chrome
-  dropbox
-  iterm
   slack
   quip
-  #vagrant
-  #virtualbox
   visual-studio-code
-  #boostnote
-  #fork
-  #jasper
-  sequel-pro
   dicord
 )
 
