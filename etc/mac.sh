@@ -1,13 +1,12 @@
 #!/bin/bash
 
-sudo rm -rf /Library/Developer/CommandLineTools
 
 xcode-select --install
 
 if test ! $(which brew); then
     echo "Installing Homebrew for your PC."
     xcode-select --install
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
     echo "done brew"
 fi
