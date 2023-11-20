@@ -192,4 +192,4 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 [ -f ~/.inshellisense/key-bindings.zsh ] && source ~/.inshellisense/key-bindings.zsh
 
 
-export PS1="%~ "
+export PS1="%~ "$'\n'""
