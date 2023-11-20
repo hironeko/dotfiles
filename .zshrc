@@ -188,3 +188,8 @@ bindkey '^r' peco-select-history
 # ssh-add --apple-use-keychain
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+[ -f ~/.inshellisense/key-bindings.zsh ] && source ~/.inshellisense/key-bindings.zsh
+
+
+export PS1="%~ "
