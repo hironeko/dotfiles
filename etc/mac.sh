@@ -25,12 +25,10 @@ CELLAR_NAME=(
     git
     go
     tree
-    # composer
     vim
     tmux
     tig
     anyenv
-    # deno
     git-secret
     awscli
     peco
@@ -64,14 +62,12 @@ cat <<EOF
 EOF
 
 CASK_NAME=(
-  clipy
   docker
   google-chrome
   slack
   visual-studio-code
   raycast
-  fig
-#   dicord
+  arc
 )
 
 for cask in ${CASK_NAME[@]}; do
@@ -80,7 +76,7 @@ for cask in ${CASK_NAME[@]}; do
   if brew list "$cask" > /dev/null 2>&1; then
       echo "$cask already installed.... skipping"
   else
-      brew install $cask
+      brew install --cask  $cask
   fi
 done
 
