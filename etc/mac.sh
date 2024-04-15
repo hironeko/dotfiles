@@ -29,10 +29,11 @@ CELLAR_NAME=(
     tmux
     tig
     anyenv
-    git-secret
     awscli
     peco
+    gh
     bat
+    git-secret
     lazygit
 )
 
@@ -68,6 +69,7 @@ CASK_NAME=(
   visual-studio-code
   raycast
   arc
+  protonvpn
 )
 
 for cask in ${CASK_NAME[@]}; do

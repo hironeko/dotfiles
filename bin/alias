@@ -23,8 +23,8 @@ alias ta='tmux a'
 
 
 # docker-compose
-alias dc="docker-compose"
-alias dce="docker-compose exec"
+alias dc="docker compose"
+alias dce="docker compose exec"
 
 # 2つ上に移動できるようにする
 alias ...='cd ../..'
