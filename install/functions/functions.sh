@@ -74,6 +74,9 @@ symlink_set () {
         ln -sf $DOTPATH/$file $HOME/$file
     done
 
+    mkdir -p $HOME/.config/zed
+    ln -sf $DOTPATH/zed/settings.json $HOME/.config/zed/settings.json
+
     cat <<EOF
     ########################
     #                      #
@@ -96,7 +99,7 @@ starship_set() {
 }
 
 setup () {
-    
+
     . $DOTPATH/etc/mac.sh
 
     # prezto_set
@@ -104,7 +107,7 @@ setup () {
     #starship_set
 
     symlink_set
-    
+
     #if [ ! -e $HOME/.emacs.d/spacemacs.mk ]; then
     #    spacemacs_set
     #fi

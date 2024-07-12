@@ -2,7 +2,7 @@
 
 if test ! $(which brew); then
     echo "Installing Homebrew for your PC."
-    xcode-select --install
+#    xcode-select --install
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
     echo "done brew"
@@ -53,13 +53,11 @@ done
 anyenv install --init
 
 cat <<EOF
-
 ############################################
 #                                          #
 #        brew cask install                 #
 #                                          #
 ############################################
-
 EOF
 
 CASK_NAME=(
@@ -70,6 +68,7 @@ CASK_NAME=(
   raycast
   arc
   protonvpn
+  zed
 )
 
 for cask in ${CASK_NAME[@]}; do
