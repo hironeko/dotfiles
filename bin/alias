@@ -34,6 +34,12 @@ alias lipL="lsof -i -P | grep 'LISTEN'"
 
 # terraform
 alias tf="terraform"
+alias tfi="terraform init"
+alias tfp="terraform plan"
+alias tfd="terraform destroy"
+alias tfd-auto="terraform destroy --auto-approve"
+alias tfa="terraform apply"
+alias tfa-auto="terraform apply --auto-approve"
 
 # saml2aws
 alias s2a="saml2aws login -a"

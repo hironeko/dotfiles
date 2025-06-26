@@ -2,6 +2,12 @@
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$PATH:~/.local/bin"
 
+# custom commands
+export PATH="$HOME/dotfiles/command/scripts:$PATH"
+export PATH="$HOME/dotfiles/command/tools:$PATH"
+export PATH="$HOME/dotfiles/command/git:$PATH"
+export PATH="$HOME/dotfiles/command/system:$PATH"
+
 # not use
 # [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
@@ -48,14 +54,10 @@ eval "$(anyenv init -)"
 export PKG_CONFIG_PATH="$(brew --prefix krb5)/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PKG_CONFIG_PATH="$(brew --prefix krb5)/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PKG_CONFIG_PATH="$(brew --prefix libjpeg)/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PKG_CONFIG_PATH="$(brew --prefix libedit)/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PKG_CONFIG_PATH="$(brew --prefix tidy-html5)/lib/pkgconfig:$PKG_CONFIG_PATH"
 
-export PATH="$(brew --prefix bison)/bin:$PATH"
 export PATH="$(brew --prefix bison)/bin:$PATH"
 export PATH="$(brew --prefix libxml2)/bin:$PATH"
 export PATH="$(brew --prefix bzip2)/bin:$PATH"
@@ -72,6 +74,3 @@ export PHP_BUILD_CONFIGURE_OPTS="--with-bz2=$(brew --prefix bzip2) --with-iconv=
 # openssl
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
-# volta for js package manager
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"

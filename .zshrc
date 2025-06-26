@@ -1,20 +1,10 @@
-# if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-#   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-# fi
-
-# # Ensure that a non-login, non-interactive shell has a defined environment.
-# if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
-#     source "${ZDOTDIR:-$HOME}/.zprofile"
-# fi
 
 # M1
 eval $(/opt/homebrew/bin/brew shellenv)
 
 # starshipコメントアウト
 #eval "$(starship init zsh)"
-eval "$(anyenv init - --no-rehash)"
 
-# eval "$(rbenv init -)"
 
 # -------------------------------------
 # alias の読み込み
@@ -32,15 +22,12 @@ eval "$(anyenv init - --no-rehash)"
 # phpenv のため
 #--------------------------------------
 
-# . $HOME/dotfiles/bin/phpenv_build_path
 
 #
 # エディタ
 export EDITOR=vim
 export VISUAL=vim
 # ページャ
-#export PAGER=/usr/local/bin/vimpager
-#export MANPAGER=/usr/local/bin/vimpager
 
 # -------------------------------------
 # zshのオプション
@@ -53,6 +40,9 @@ setopt auto_list
 setopt auto_menu
 zstyle ":completion:*" menu select
 
+# 大文字小文字を区別しない補完
+zstyle ":completion:*" matcher-list 'm:{a-z}={A-Z}' 'm:{A-Z}={a-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
 ## 入力しているコマンド名が間違っている場合にもしかして：を出す。
 setopt correct
 
@@ -60,7 +50,6 @@ setopt correct
 setopt no_beep
 
 ## 色を使う
-setopt prompt_subst
 
 ## ^Dでログアウトしない。
 setopt ignoreeof
@@ -68,7 +57,7 @@ setopt ignoreeof
 setopt complete_in_word
 
 ## バックグラウンドジョブが終了したらすぐに知らせる。
-setopt no_tify
+setopt notify
 
 # 補完
 
@@ -78,19 +67,6 @@ setopt auto_pushd
 # ディレクトリ名を入力するだけでcdできるようにする
 setopt auto_cd
 
-# -------------------------------------
-# パス
-# -------------------------------------
-
-# 重複する要素を自動的に削除
-typeset -U path cdpath fpath manpath
-
-path=(
-    $HOME/bin(N-/)
-    /usr/local/bin(N-/)
-    /usr/local/sbin(N-/)
-    $path
-)
 
 # -------------------------------------
 # プロンプト
@@ -137,7 +113,7 @@ function vcs_prompt_info() {
 #PROMPT+="%% "
 #RPROMPT="[%*]"
 
-RPROMPT=\$vcs_info_msg_0_
+# RPROMPT=\$vcs_info_msg_0_  # 新しいプロンプトを使用するためコメントアウト
 
 # -------------------------------------
 # キーバインド
@@ -153,14 +129,19 @@ function cdup() {
 zle -N cdup
 bindkey '^K' cdup
 
-bindkey "^R" history-incremental-search-backward
 
 # -------------------------------------
 # その他
 # -------------------------------------
 
 # cdしたあとで、自動的に ls する
-function chpwd() { ls -a1 }
+function chpwd() { 
+  ls -a1
+  # Git Worktree関数がロードされている場合のみ実行
+  if typeset -f __git_worktree_chpwd > /dev/null; then
+    __git_worktree_chpwd
+  fi
+}
 
 # change tab name(title)
 function title {
@@ -184,12 +165,98 @@ zle -N peco-select-history
 bindkey '^r' peco-select-history
 
 
-# eval "$(ssh-agent -s)"
-# ssh-add --apple-use-keychain
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
-[ -f ~/.inshellisense/key-bindings.zsh ] && source ~/.inshellisense/key-bindings.zsh
+# [ -f ~/.inshellisense/key-bindings.zsh ] && source ~/.inshellisense/key-bindings.zsh
 
 
-export PS1="%~ "$'\n'""
+# モダンなプロンプト設定（Nordic風）
+setopt prompt_subst
+
+# カラー定義（淡い青系パレット）
+local blue_dark="%F{#1e3a5f}"
+local blue_light="%F{#7db3d3}"
+local blue_sky="%F{#87ceeb}"
+local blue_powder="%F{#b0e0e6}"
+local blue_alice="%F{#f0f8ff}"
+local blue_steel="%F{#4682b4}"
+local blue_cornflower="%F{#6495ed}"
+local blue_dodger="%F{#1e90ff}"
+local blue_royal="%F{#4169e1}"
+local blue_navy="%F{#191970}"
+local blue_midnight="%F{#2f4f4f}"
+local reset="%f"
+
+# Git情報を取得する関数
+git_info() {
+    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        local branch=$(git branch --show-current 2>/dev/null)
+        local git_status=""
+        
+        # ブランチ名が取得できない場合（detached HEAD等）
+        if [[ -z "$branch" ]]; then
+            branch=$(git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
+        fi
+        
+        # ステータスチェック
+        if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
+            git_status=" ${blue_cornflower}●${reset}"
+        else
+            git_status=" ${blue_sky}●${reset}"
+        fi
+        
+        echo " 🌿 ${blue_steel}${branch}${git_status}"
+    fi
+}
+
+# プロンプト構築
+build_prompt() {
+    local user_host="⚡ ${blue_light}%n${blue_midnight}@${blue_sky}%m${reset}"
+    local current_dir="📂 ${blue_steel}%~${reset}"
+    local git_branch="$(git_info)"
+    local time="🕐 ${blue_powder}%T${reset}"
+    
+    # 左プロンプト：アイコン付きで楽しく
+    PROMPT="${user_host} ${current_dir}${git_branch} ${time}"$'\n'"${blue_royal}❯${reset} "
+    
+    # 右プロンプト：実行時間など（オプション）
+    RPROMPT=""
+}
+
+# プロンプト更新
+precmd_functions+=(build_prompt)
+
+# gitでbranchを grep して削除
+gb-d() {
+  if [ -z "$1" ]; then
+    echo "Usage: gbd <pattern>"
+    return 1
+  fi
+  git branch | grep "$1" | xargs git branch -D
+}
+
+
+. "$HOME/.local/bin/env"
+
+# AWS関連の関数を遅延読み込み
+autoload -Uz aws_functions
+function aws_functions() {
+  if [ -f "$HOME/dotfiles/functions/aws_functions.sh" ]; then
+    source "$HOME/dotfiles/functions/aws_functions.sh"
+  fi
+}
+
+# Git Worktree関連の関数を遅延読み込み
+autoload -Uz git_worktree_functions
+function git_worktree_functions() {
+  if [ -f "$HOME/dotfiles/functions/git_worktree.sh" ]; then
+    source "$HOME/dotfiles/functions/git_worktree.sh"
+  fi
+}
+
+readonly COLOR_SUCCESS='\033[0;32m'
+readonly COLOR_WARNING='\033[0;33m'
+readonly COLOR_ERROR='\033[0;31m'
+readonly COLOR_INFO='\033[0;34m'
+readonly COLOR_RESET='\033[0m'

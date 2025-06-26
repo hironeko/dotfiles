@@ -6,3 +6,9 @@
 node_modules
 yarn.lock
 docker/data
+
+# Claude Code configurations
+.claude/*
+!.claude/CLAUDE.md
+!.claude/settings.json
+!.claude/commands/

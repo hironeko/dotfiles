@@ -1,0 +1,159 @@
+# =============================================================================
+# tmux設定ファイル - 改善版
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 基本設定
+# -----------------------------------------------------------------------------
+set -g base-index 1                       # ウィンドウ番号1から開始
+setw -g pane-base-index 1                 # ペイン番号1から開始（追加）
+set -s escape-time 0                      # escキーの待ち時間を消す
+set -g mouse on                           # マウス操作を有効
+set -g renumber-windows on                # ウィンドウを閉じた時に番号を振り直す
+set -g history-limit 50000               # スクロール履歴を50,000行に増量（改善）
+set -g display-time 4000                 # メッセージ表示時間を4秒に（追加）
+set -g display-panes-time 4000           # ペイン番号表示時間を4秒に（追加）
+
+# UTF-8サポート（tmux 3.x以降では自動）
+set -g status-utf8 on                     # ステータスバーでUTF-8使用（追加）
+
+# -----------------------------------------------------------------------------
+# プリフィックスキー設定
+# -----------------------------------------------------------------------------
+unbind C-b
+set -g prefix C-t
+bind C-t send-prefix
+
+# -----------------------------------------------------------------------------
+# キーバインド - 基本操作
+# -----------------------------------------------------------------------------
+# 設定再読み込み
+bind r source-file ~/.tmux.conf \; display "設定を再読み込みしました"
+
+# ペイン分割（より直感的に）
+bind | split-window -h -c "#{pane_current_path}"  # 縦分割（追加）
+bind - split-window -v -c "#{pane_current_path}"  # 横分割（追加）
+unbind '"'
+unbind %
+
+# ペイン移動（vi風）
+bind h select-pane -L                     # 左へ（追加）
+bind j select-pane -D                     # 下へ（追加）
+bind k select-pane -U                     # 上へ（追加）
+bind l select-pane -R                     # 右へ（追加）
+
+# ペインリサイズ（修正 - より直感的に）
+bind -r H resize-pane -L 5                # 左に縮小
+bind -r J resize-pane -D 5                # 下に拡大
+bind -r K resize-pane -U 5                # 上に縮小
+bind -r L resize-pane -R 5                # 右に拡大
+
+# ウィンドウ移動
+bind -r C-h select-window -t :-          # 前のウィンドウ（追加）
+bind -r C-l select-window -t :+          # 次のウィンドウ（追加）
+
+# -----------------------------------------------------------------------------
+# コピーモード設定（vi風）
+# -----------------------------------------------------------------------------
+setw -g mode-keys vi                      # vi風キーバインド（追加）
+bind Enter copy-mode                      # コピーモード開始（追加）
+
+# コピーモード中のvi風キーバインド
+bind -T copy-mode-vi v send-keys -X begin-selection              # 選択開始（追加）
+bind -T copy-mode-vi C-v send-keys -X rectangle-toggle           # 矩形選択（追加）
+bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel    # コピー（追加）
+bind -T copy-mode-vi Escape send-keys -X cancel                  # キャンセル（追加）
+
+# -----------------------------------------------------------------------------
+# ステータスバー設定
+# -----------------------------------------------------------------------------
+set -g status-position bottom
+set -g status-interval 5                 # 更新間隔を5秒に変更（CPU負荷軽減）
+set -g status-justify centre
+
+# ステータスバー左側（セッション情報、ホスト名）
+set -g status-left-length 50
+set -g status-left '#[fg=colour154,bold]#S #[fg=colour240]| #[fg=colour33]#h'
+
+# ステータスバー右側（CPU使用率、メモリ、日時）
+set -g status-right-length 80
+set -g status-right '#[fg=colour154]CPU: #{cpu_percentage} #[fg=colour240]| #[fg=colour33]MEM: #{ram_percentage} #[fg=colour240]| #[fg=colour208]%Y-%m-%d(%a) %H:%M'
+
+# ウィンドウリストの設定
+setw -g window-status-format ' #I:#W#F '
+setw -g window-status-current-format ' #I:#W#F '
+
+# -----------------------------------------------------------------------------
+# カラー設定（True Color対応）
+# -----------------------------------------------------------------------------
+set -g default-terminal "tmux-256color"
+set -as terminal-overrides ',xterm*:Tc'   # True Color対応（改善）
+
+# ステータスバーの色（改善されたカラーパレット）
+set -g status-style 'bg=#2e3440,fg=#88c0d0'
+
+# ウィンドウステータスの色
+setw -g window-status-style 'fg=#81a1c1,bg=default'
+setw -g window-status-current-style 'fg=#88c0d0,bg=#5e81ac,bold'
+setw -g window-status-activity-style 'fg=#bf616a,bg=default'
+
+# ペインボーダーの色（改善）
+set -g pane-border-style 'fg=#4c566a'
+set -g pane-active-border-style 'fg=#88c0d0,bold'
+
+# メッセージとコマンドラインの色
+set -g message-style 'bg=#434c5e,fg=#eceff4'
+set -g message-command-style 'bg=#434c5e,fg=#eceff4'
+
+# コピーモードの色
+setw -g mode-style 'bg=#5e81ac,fg=#eceff4'
+
+# -----------------------------------------------------------------------------
+# プラグイン設定（推奨）
+# -----------------------------------------------------------------------------
+# tmux plugin manager（tpm）の設定
+# 以下をコメントアウトして、必要に応じて有効化
+# set -g @plugin 'tmux-plugins/tpm'
+# set -g @plugin 'tmux-plugins/tmux-sensible'
+# set -g @plugin 'tmux-plugins/tmux-resurrect'
+# set -g @plugin 'tmux-plugins/tmux-continuum'
+# set -g @plugin 'tmux-plugins/tmux-cpu'
+
+# プラグイン固有設定
+# set -g @resurrect-capture-pane-contents 'on'
+# set -g @continuum-restore 'on'
+
+# プラグインマネージャー初期化（最後に記述）
+# run '~/.tmux/plugins/tpm/tpm'
+
+# -----------------------------------------------------------------------------
+# 追加設定（便利機能）
+# -----------------------------------------------------------------------------
+# ウィンドウリストでアクティビティを監視
+setw -g monitor-activity on
+set -g visual-activity off              # アクティビティ通知を無効（うるさくないように）
+
+# ペイン同期切り替え
+bind S setw synchronize-panes            # 全ペインで同じ入力を実行
+
+# 新しいウィンドウを現在のディレクトリで開く
+bind c new-window -c "#{pane_current_path}"
+
+# ペイン終了確認
+bind x confirm-before -p "ペインを終了しますか? (y/n)" kill-pane
+
+# セッション選択メニュー
+bind s choose-tree -Zs
+
+# -----------------------------------------------------------------------------
+# 設定の説明（コメント）
+# -----------------------------------------------------------------------------
+# この設定ファイルの主な改善点：
+# 1. ペイン番号も1から開始するように設定
+# 2. より直感的なペイン分割キーバインド（| と -）
+# 3. vi風のペイン移動とコピーモード
+# 4. CPU負荷を考慮したステータス更新間隔
+# 5. True Color対応
+# 6. 現代的で視認性の良いカラーパレット
+# 7. 便利な追加機能
+# 8. プラグイン使用の準備
