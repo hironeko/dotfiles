@@ -19,10 +19,11 @@ This is a dotfiles repository for managing development environment configuration
 - Version control: Git with worktree support
 
 ## Recent Updates:
-- Modernized tmux status bar with Nordic color scheme
-- Cleaned up .zshrc removing dead code and duplicates
-- Optimized shell startup performance
-- Added lazy loading for heavy functions
+- Implemented Powerlevel10k theme for beautiful prompts with Powerline arrows
+- Modernized tmux status bar with blue Nordic color scheme and Powerline design
+- Added Nerd Fonts support (Hack, FiraCode, MesloLG)
+- Cleaned up .zshrc removing custom prompt code (now using p10k)
+- Added case-insensitive completion for better usability
 
 ## Commands to Run:
 When making changes to shell configurations, always test with:

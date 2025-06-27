@@ -35,6 +35,11 @@ CELLAR_NAME=(
     bat
     git-secret
     lazygit
+    powerlevel10k
+    powerline-go
+    font-hack-nerd-font
+    font-fira-code-nerd-font
+    font-meslo-lg-nerd-font
 )
 
 for cellar in ${CELLAR_NAME[@]}; do

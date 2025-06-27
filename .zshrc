@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 
 # M1
 eval $(/opt/homebrew/bin/brew shellenv)
@@ -171,61 +178,9 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 # [ -f ~/.inshellisense/key-bindings.zsh ] && source ~/.inshellisense/key-bindings.zsh
 
 
-# モダンなプロンプト設定（Nordic風）
-setopt prompt_subst
 
-# カラー定義（淡い青系パレット）
-local blue_dark="%F{#1e3a5f}"
-local blue_light="%F{#7db3d3}"
-local blue_sky="%F{#87ceeb}"
-local blue_powder="%F{#b0e0e6}"
-local blue_alice="%F{#f0f8ff}"
-local blue_steel="%F{#4682b4}"
-local blue_cornflower="%F{#6495ed}"
-local blue_dodger="%F{#1e90ff}"
-local blue_royal="%F{#4169e1}"
-local blue_navy="%F{#191970}"
-local blue_midnight="%F{#2f4f4f}"
-local reset="%f"
-
-# Git情報を取得する関数
-git_info() {
-    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        local branch=$(git branch --show-current 2>/dev/null)
-        local git_status=""
-        
-        # ブランチ名が取得できない場合（detached HEAD等）
-        if [[ -z "$branch" ]]; then
-            branch=$(git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
-        fi
-        
-        # ステータスチェック
-        if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
-            git_status=" ${blue_cornflower}●${reset}"
-        else
-            git_status=" ${blue_sky}●${reset}"
-        fi
-        
-        echo " 🌿 ${blue_steel}${branch}${git_status}"
-    fi
-}
-
-# プロンプト構築
-build_prompt() {
-    local user_host="⚡ ${blue_light}%n${blue_midnight}@${blue_sky}%m${reset}"
-    local current_dir="📂 ${blue_steel}%~${reset}"
-    local git_branch="$(git_info)"
-    local time="🕐 ${blue_powder}%T${reset}"
-    
-    # 左プロンプト：アイコン付きで楽しく
-    PROMPT="${user_host} ${current_dir}${git_branch} ${time}"$'\n'"${blue_royal}❯${reset} "
-    
-    # 右プロンプト：実行時間など（オプション）
-    RPROMPT=""
-}
-
-# プロンプト更新
-precmd_functions+=(build_prompt)
+# Powerlevel10k theme
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # gitでbranchを grep して削除
 gb-d() {
@@ -260,3 +215,6 @@ readonly COLOR_WARNING='\033[0;33m'
 readonly COLOR_ERROR='\033[0;31m'
 readonly COLOR_INFO='\033[0;34m'
 readonly COLOR_RESET='\033[0m'
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
