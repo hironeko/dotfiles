@@ -87,40 +87,14 @@ autoload -Uz add-zsh-hook
 
 setopt prompt_subst
 
-# begin VCS
-zstyle ":vcs_info:*" enable git svn hg bzr
-zstyle ":vcs_info:*" formats "(%s)-[%b]"
-zstyle ":vcs_info:*" actionformats "(%s)-[%b|%a]"
-zstyle ":vcs_info:(svn|bzr):*" branchformat "%b:r%r"
-zstyle ":vcs_info:bzr:*" use-simple true
-
-zstyle ":vcs_info:*" max-exports 6
-
-# %b カレントブランチ
-# %u not add  %c add only  %n yourname
-if is-at-least 4.3.10; then
-    zstyle ":vcs_info:git:*" check-for-changes true # commitしていないのをチェック
-    zstyle ":vcs_info:git:*" stagedstr "%F{yellow} ✚"
-    zstyle ":vcs_info:git:*" unstagedstr "%F{magenta} ✖"
-    zstyle ":vcs_info:git:*" formats "%F{cyan}(%b)%c%u%f"
-    zstyle ":vcs_info:git:*" actionformats "(%s)-[%b|%a]%c%u"
-fi
-
-precmd(){ vcs_info }
-
-function vcs_prompt_info() {
-    psvar=()
-    LANG=en_US.UTF-8 vcs_info
-    [[ -n "$vcs_info_msg_0_" ]] && echo -n " %{$fg[yellow]%}$vcs_info_msg_0_%f"
-}
-# end VCS
+# VCS設定削除（Powerlevel10kで代替）
 
 #PROMPT+="%(?.%F{green}$OK%f.%F{red}$NG%f) "
 #PROMPT+="%F{blue}%~%f\$(vcs_prompt_info)"
 #PROMPT+="%% "
 #RPROMPT="[%*]"
 
-# RPROMPT=\$vcs_info_msg_0_  # 新しいプロンプトを使用するためコメントアウト
+# 古いプロンプト設定削除（Powerlevel10kで代替）
 
 # -------------------------------------
 # キーバインド
@@ -218,3 +192,6 @@ readonly COLOR_RESET='\033[0m'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export GOROOT="$(brew --prefix go)/libexec"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"

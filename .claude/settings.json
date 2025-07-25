@@ -5,10 +5,11 @@
       "Bash(mkdir:*)",
       "Bash(ln:*)",
       "Bash(chmod:*)",
-      "Bash(rm:*)",
       "Bash(brew list:*)",
       "Bash(gemini:*)"
     ],
-    "deny": []
+    "deny": [
+      "Bash(rm -rf:*)"
+    ]
   }
 }

@@ -58,3 +58,5 @@ alias lgit="lazygit"
 
 # aws-vault関連のalias
 alias ave="aws-vault exec"
+
+alias difit-t="npx difit --tui "
