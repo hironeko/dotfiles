@@ -41,6 +41,9 @@ CELLAR_NAME=(
     font-hack-nerd-font
     font-fira-code-nerd-font
     font-meslo-lg-nerd-font
+    volta
+    jq
+    fd
 )
 
 for cellar in ${CELLAR_NAME[@]}; do
@@ -74,7 +77,8 @@ CASK_NAME=(
   raycast
   arc
   protonvpn
-  zed
+  warp
+  orbstack
 )
 
 for cask in ${CASK_NAME[@]}; do
