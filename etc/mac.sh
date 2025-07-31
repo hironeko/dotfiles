@@ -4,6 +4,7 @@ if test ! $(which brew); then
     echo "Installing Homebrew for your PC."
 #    xcode-select --install
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    exec $SHELL -l
 else
     echo "done brew"
 fi
