@@ -32,6 +32,27 @@ _aws_log() {
     esac
 }
 
+# Cross-shell prompt reader (zsh/bash)
+_aws_prompt() {
+    local var="$1"; shift
+    local prompt="$1"
+    if [[ -n "${ZSH_VERSION-}" ]]; then
+        read -r "?$prompt" "$var"
+    else
+        read -r -p "$prompt" "$var"
+    fi
+}
+
+_aws_confirm() {
+    local message="$1"
+    local response
+    _aws_prompt response "$message (y/N): "
+    case "$response" in
+        [yY][eE][sS]|[yY]) return 0 ;;
+        *) return 1 ;;
+    esac
+}
+
 # Check dependencies
 _check_dependencies() {
     local missing_deps=()
@@ -232,13 +253,31 @@ copy_to_clipboard() {
 # AWS Profile Management
 # =============================================================================
 
+# List SSO profiles from ~/.aws/config (includes [default] if SSO)
+_list_sso_profiles_from_config() {
+    local config_file="${HOME}/.aws/config"
+    [[ -f "$config_file" ]] || return 1
+    awk '
+        function flush() { if (profile && sso) print profile }
+        /^\[default\]/ { flush(); profile="default"; sso=0; next }
+        /^\[profile / { flush(); profile=$0; sub(/^\[profile /,"",profile); sub(/\]$/,"",profile); sso=0; next }
+        /^[[:space:]]*sso_(start_url|session|account_id|role_name)[[:space:]]*=/ { sso=1 }
+        END { flush() }
+    ' "$config_file"
+}
+
 # Interactive AWS profile selection
 select_aws_profile() {
     local prompt_text="${1:-Select AWS profile:}"
     local profiles=""
     
-    # Method 1: Get profiles from config file
+    # Prefer SSO profiles if available
     if [[ -f ~/.aws/config ]]; then
+        profiles=$(_list_sso_profiles_from_config 2>/dev/null || true)
+    fi
+    
+    # Method 1: Get profiles from config file
+    if [[ -z "$profiles" ]] && [[ -f ~/.aws/config ]]; then
         profiles=$(grep -E "^\[profile " ~/.aws/config | sed -E 's/^\[profile (.*)\]$/\1/')
     fi
     
@@ -354,16 +393,14 @@ select_ec2() {
     fi
     
     # Build filter options
-    local filter_option=""
+    local filter_args=()
     if [[ "$filter_choice" != "すべて表示" ]] && [[ -n "$filter_choice" ]]; then
-        filter_option="--filters Name=tag:Name,Values=*${filter_choice}* Name=instance-state-name,Values=running"
-    else
-        filter_option="--filters Name=instance-state-name,Values=running"
+        filter_args=(--filters "Name=tag:Name,Values=*${filter_choice}*" "Name=instance-state-name,Values=running")
     fi
     
     # Execute AWS command
     local result
-    result=$(aws ec2 describe-instances --profile "$profile" $filter_option --output json --region "$AWS_REGION" 2>/dev/null)
+    result=$(aws ec2 describe-instances --profile "$profile" "${filter_args[@]}" --output json --region "$AWS_REGION" 2>/dev/null)
     
     if [[ $? -ne 0 ]] || [[ -z "$result" ]]; then
         _aws_log error "Failed to fetch EC2 instances"
@@ -374,7 +411,6 @@ select_ec2() {
     local instance_list
     instance_list=$(echo "$result" | jq -r '
         .Reservations[].Instances[] |
-        select(.State.Name == "running") |
         .InstanceId + " | " + 
         ((.Tags[]? | select(.Key=="Name") | .Value) // "NoName") + " | " + 
         .InstanceType + " | " + 
@@ -383,8 +419,26 @@ select_ec2() {
     ' | sort)
     
     if [[ -z "$instance_list" ]]; then
-        _aws_log warning "No running instances found"
-        return 1
+        if [[ "$filter_choice" != "すべて表示" ]] && [[ -n "$filter_choice" ]]; then
+            _aws_log warning "No instances matched filter. Showing all instances instead."
+            result=$(aws ec2 describe-instances --profile "$profile" --output json --region "$AWS_REGION" 2>/dev/null)
+            if [[ $? -ne 0 ]] || [[ -z "$result" ]]; then
+                _aws_log error "Failed to fetch EC2 instances"
+                return 1
+            fi
+            instance_list=$(echo "$result" | jq -r '
+                .Reservations[].Instances[] |
+                .InstanceId + " | " +
+                ((.Tags[]? | select(.Key=="Name") | .Value) // "NoName") + " | " +
+                .InstanceType + " | " +
+                (.PublicIpAddress // "No Public IP") + " | " +
+                .State.Name
+            ' | sort)
+        fi
+        if [[ -z "$instance_list" ]]; then
+            _aws_log warning "No instances found"
+            return 1
+        fi
     fi
     
     # Interactive selection
@@ -426,11 +480,42 @@ ec2_connect() {
         return 1
     fi
     
+    if [[ -n "$instance_id" ]]; then
+        if [[ "$instance_id" =~ (i-[A-Za-z0-9]{8,17}) ]]; then
+            instance_id="${BASH_REMATCH[1]}"
+        else
+            _aws_log warning "Invalid instance ID input; selecting from list instead."
+            instance_id=""
+        fi
+    fi
+    
+    if [[ -z "$instance_id" ]]; then
+        _aws_prompt instance_id "Instance ID (i-xxxxxxxx, blank to select): "
+        if [[ -n "$instance_id" ]]; then
+            if [[ "$instance_id" =~ (i-[A-Za-z0-9]{8,17}) ]]; then
+                instance_id="${BASH_REMATCH[1]}"
+            else
+                _aws_log warning "Invalid instance ID input; selecting from list instead."
+                instance_id=""
+            fi
+        fi
+    fi
+    
     if [[ -z "$instance_id" ]]; then
         instance_id=$(select_ec2 "$profile")
         if [[ $? -ne 0 ]]; then
             return 1
         fi
+    fi
+    
+    if [[ ! "$instance_id" =~ ^i-[A-Za-z0-9]{8,17}$ ]]; then
+        _aws_log error "Invalid instance ID: $instance_id"
+        return 1
+    fi
+    
+    if [[ ! "$instance_id" =~ ^i-[A-Za-z0-9]{8,17}$ ]]; then
+        _aws_log error "Invalid instance ID: $instance_id"
+        return 1
     fi
     
     _aws_log info "Connecting to instance: $instance_id"
@@ -460,6 +545,27 @@ rds_forward() {
     if ! ensure_aws_login "$profile"; then
         _aws_log error "Authentication failed"
         return 1
+    fi
+    
+    if [[ -n "$instance_id" ]]; then
+        if [[ "$instance_id" =~ (i-[A-Za-z0-9]{8,17}) ]]; then
+            instance_id="${BASH_REMATCH[1]}"
+        else
+            _aws_log warning "Invalid instance ID input; selecting from list instead."
+            instance_id=""
+        fi
+    fi
+    
+    if [[ -z "$instance_id" ]]; then
+        _aws_prompt instance_id "Instance ID (i-xxxxxxxx, blank to select): "
+        if [[ -n "$instance_id" ]]; then
+            if [[ "$instance_id" =~ (i-[A-Za-z0-9]{8,17}) ]]; then
+                instance_id="${BASH_REMATCH[1]}"
+            else
+                _aws_log warning "Invalid instance ID input; selecting from list instead."
+                instance_id=""
+            fi
+        fi
     fi
     
     if [[ -z "$instance_id" ]]; then
@@ -497,6 +603,12 @@ rds_forward() {
     
     # Parse RDS configuration
     IFS=':' read -r env_name host remote_port local_port <<< "$rds_config"
+    remote_port="${remote_port:-3306}"
+    local_port="${local_port:-13306}"
+    
+    local default_local_port="$local_port"
+    _aws_prompt local_port "Local port [${default_local_port}]: "
+    local_port="${local_port:-$default_local_port}"
     
     _aws_log info "Connecting to $env_name environment: $host"
     _aws_log info "Port forwarding: localhost:$local_port -> $host:$remote_port"
@@ -594,12 +706,7 @@ ecs_exec() {
 
 # Confirmation prompt
 _confirm() {
-    local message="$1"
-    read -r -p "$message (y/N): " response
-    case "$response" in
-        [yY][eE][sS]|[yY]) return 0 ;;
-        *) return 1 ;;
-    esac
+    _aws_confirm "$1"
 }
 
 # Main interactive menu
@@ -670,7 +777,8 @@ aws_helper_menu() {
         
         if [[ -n "$selected" ]] && [[ "$selected" != "🚪 Exit" ]]; then
             echo
-            read -r -p "Press Enter to continue..."
+            local _pause=""
+            _aws_prompt _pause "Press Enter to continue..."
         fi
     done
 }

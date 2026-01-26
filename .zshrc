@@ -32,8 +32,8 @@ eval $(/opt/homebrew/bin/brew shellenv)
 
 #
 # エディタ
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 # ページャ
 
 # -------------------------------------
@@ -166,15 +166,22 @@ gb-d() {
 }
 
 
-. "$HOME/.local/bin/env"
+# . "$HOME/.local/bin/env"
 
-# AWS関連の関数を遅延読み込み
-autoload -Uz aws_functions
-function aws_functions() {
-  if [ -f "$HOME/dotfiles/functions/aws_functions.sh" ]; then
-    source "$HOME/dotfiles/functions/aws_functions.sh"
-  fi
-}
+# AWSヘルパー（通常版）
+if [ -f "$HOME/dotfiles/functions/aws_functions.sh" ]; then
+  source "$HOME/dotfiles/functions/aws_functions.sh"
+fi
+
+# AWSヘルパー（MFA版）
+if [ -f "$HOME/dotfiles/functions/aws_functions_for_mfa.sh" ]; then
+  source "$HOME/dotfiles/functions/aws_functions_for_mfa.sh"
+fi
+
+# AWS Assume Role ヘルパー
+if [ -f "$HOME/dotfiles/functions/aws_assume_role.sh" ]; then
+  source "$HOME/dotfiles/functions/aws_assume_role.sh"
+fi
 
 # Git Worktree関連の関数を遅延読み込み
 autoload -Uz git_worktree_functions
@@ -195,3 +202,7 @@ readonly COLOR_RESET='\033[0m'
 export GOROOT="$(brew --prefix go)/libexec"
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+<<<<<<< Updated upstream
+=======
+export PATH="$HOME/bin:$PATH"
+>>>>>>> Stashed changes

@@ -11,10 +11,12 @@ This is a dotfiles repository for managing development environment configuration
 - `command/`: Custom commands and utilities
 - `.claude/`: Claude Code configuration
 - `shared-tasks/`: Multi-agent task management
+- `nvim/`: Neovim configuration (VSCode-like setup)
 
 ## Development Environment:
 - Shell: zsh with custom configuration
 - Terminal multiplexer: tmux with Nordic-style theme
+- Editor: Neovim with VSCode-like configuration (lazy.nvim, LSP, Telescope, etc.)
 - Package managers: brew, anyenv, volta
 - Version control: Git with worktree support
 
@@ -24,6 +26,15 @@ This is a dotfiles repository for managing development environment configuration
 - Added Nerd Fonts support (Hack, FiraCode, MesloLG)
 - Cleaned up .zshrc removing custom prompt code (now using p10k)
 - Added case-insensitive completion for better usability
+- Added comprehensive Neovim configuration with VSCode-like features:
+  - Plugin manager: lazy.nvim
+  - File explorer: nvim-tree
+  - Fuzzy finder: Telescope
+  - LSP support: mason + nvim-lspconfig
+  - Auto-completion: nvim-cmp
+  - Syntax highlighting: treesitter
+  - UI enhancements: lualine, bufferline, indent-blankline
+  - Git integration: gitsigns
 
 ## Commands to Run:
 When making changes to shell configurations, always test with:

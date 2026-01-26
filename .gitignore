@@ -3,9 +3,11 @@
 .emacs.d/*
 .emacs.d_bk/
 .DS_Store
+.nvimlog
 node_modules
 yarn.lock
 docker/data
+functions/aws_mfa_config.sh
 
 # Claude Code configurations
 .claude/*
