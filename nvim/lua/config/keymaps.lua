@@ -14,7 +14,7 @@ keymap("n", "<C-s>", ":w<CR>", opts) -- Save file (VSCode-like)
 keymap("i", "<C-s>", "<Esc>:w<CR>a", opts) -- Save in insert mode
 keymap("n", "<leader>q", ":q<CR>", opts) -- Quit
 keymap("n", "<leader>Q", ":qa!<CR>", opts) -- Quit all without saving
-keymap("n", "<C-q>", ":bdelete<CR>", opts) -- Close buffer (alternative to Ctrl+W)
+-- <C-q> close buffer is defined in plugins/bufdelete.lua
 
 -- Window navigation (VSCode-like Ctrl+W alternatives)
 keymap("n", "<C-h>", "<C-w>h", opts) -- Left window
@@ -43,9 +43,7 @@ keymap("n", "<leader>tp", ":tabprev<CR>", opts) -- Previous tab
 -- Buffer navigation
 keymap("n", "<S-l>", ":bnext<CR>", opts) -- Next buffer
 keymap("n", "<S-h>", ":bprevious<CR>", opts) -- Previous buffer
-keymap("n", "<leader>bd", ":bdelete<CR>", opts) -- Delete buffer
-keymap("n", "<leader>x", ":bdelete<CR>", opts) -- Close current buffer (shorter)
-keymap("n", "<leader>bx", ":bdelete!<CR>", opts) -- Force close buffer
+-- Buffer close keymaps are defined in plugins/bufdelete.lua (fixes nvim-tree issue)
 
 -- Better indenting
 keymap("v", "<", "<gv", opts)
