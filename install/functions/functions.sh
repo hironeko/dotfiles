@@ -77,6 +77,9 @@ symlink_set () {
     mkdir -p $HOME/.config/zed
     ln -sf $DOTPATH/zed/settings.json $HOME/.config/zed/settings.json
     mkdir -p $HOME/.config
+    if [ -e "$HOME/.config/nvim" ] || [ -L "$HOME/.config/nvim" ]; then
+        mv -f "$HOME/.config/nvim" "$HOME/.config/nvim.bak.$(date +%Y%m%d%H%M%S)"
+    fi
     ln -sfn $DOTPATH/nvim $HOME/.config/nvim
 
     cat <<EOF
