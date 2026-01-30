@@ -27,6 +27,7 @@ CELLAR_NAME=(
     go
     tree
     vim
+    neovim
     tmux
     tig
     anyenv
@@ -44,6 +45,8 @@ CELLAR_NAME=(
     volta
     jq
     fd
+    tree-sitter
+    tree-sitter-cli
 )
 
 for cellar in ${CELLAR_NAME[@]}; do

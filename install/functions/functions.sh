@@ -76,6 +76,8 @@ symlink_set () {
 
     mkdir -p $HOME/.config/zed
     ln -sf $DOTPATH/zed/settings.json $HOME/.config/zed/settings.json
+    mkdir -p $HOME/.config
+    ln -sfn $DOTPATH/nvim $HOME/.config/nvim
 
     cat <<EOF
     ########################

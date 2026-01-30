@@ -10,35 +10,47 @@ local parsers = {
 
 return {
   "nvim-treesitter/nvim-treesitter",
-  build = function()
-    -- Auto-install parsers on first setup
-    local install = require("nvim-treesitter.install")
-
-    for _, parser in ipairs(parsers) do
-      pcall(function()
-        install.update({ with_sync = false })(parser)
-      end)
-    end
-  end,
-  event = { "BufReadPost", "BufNewFile" },
+  lazy = false,
+  build = ":TSUpdate",
   dependencies = {
     "windwp/nvim-ts-autotag",
   },
   config = function()
-    -- Treesitter highlighting is enabled by default in Neovim 0.9+
     -- Register additional language mappings
     vim.treesitter.language.register('bash', 'sh')
 
-    local ok_configs, ts_configs = pcall(require, "nvim-treesitter.configs")
-    if ok_configs then
-      ts_configs.setup({
-        ensure_installed = parsers,
-        auto_install = true,
-        highlight = { enable = true },
-      })
-    else
+    local ok_ts, ts = pcall(require, "nvim-treesitter")
+    if not ok_ts then
       vim.notify("nvim-treesitter not installed. Run :Lazy sync", vim.log.levels.WARN)
+      return
     end
+
+    -- Blade parser (not bundled by default in nvim-treesitter)
+    local ok_parsers, parsers_conf = pcall(require, "nvim-treesitter.parsers")
+    local function register_blade_parser()
+      if not ok_parsers then
+        return
+      end
+      parsers_conf.blade = {
+        install_info = {
+          url = "https://github.com/EmranMR/tree-sitter-blade",
+          files = { "src/parser.c" },
+          branch = "main",
+          queries = "queries",
+        },
+        filetype = "blade",
+      }
+    end
+    register_blade_parser()
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "TSUpdate",
+      callback = register_blade_parser,
+    })
+
+    -- Install parsers (no-op if already installed)
+    pcall(function()
+      ts.install(parsers)
+    end)
 
     -- Enable ts-autotag for HTML/JSX auto-closing
     local ok_autotag, autotag = pcall(require, "nvim-ts-autotag")
@@ -51,5 +63,13 @@ return {
         }
       })
     end
+
+    -- Ensure treesitter starts for blade files
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "blade",
+      callback = function()
+        pcall(vim.treesitter.start)
+      end,
+    })
   end,
 }

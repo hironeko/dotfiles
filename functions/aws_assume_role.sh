@@ -63,7 +63,9 @@ aws-whoami() {
                 local sso_config
                 sso_config=$(_get_sso_session_config "$session")
                 if [[ $? -eq 0 ]] && [[ -n "$sso_config" ]]; then
-                    IFS='|' read -r sso_start_url sso_region <<< "$sso_config"
+                    IFS='|' read -r sso_start_url sso_region <<EOF
+$sso_config
+EOF
                     local token
                     token=$(_get_sso_access_token "$sso_start_url")
                     if [[ -n "$token" ]]; then
@@ -78,7 +80,9 @@ aws-whoami() {
                         echo
                     fi
                 fi
-            done <<< "$sessions"
+            done <<EOF
+$sessions
+EOF
             if [[ "$any_valid" == true ]]; then
                 return 1
             fi
@@ -353,7 +357,9 @@ aws-sso-switch() {
         return 1
     fi
 
-    IFS='|' read -r sso_start_url sso_region <<< "$sso_config"
+    IFS='|' read -r sso_start_url sso_region <<EOF
+$sso_config
+EOF
 
     # Check if we have a valid access token
     local access_token
@@ -474,7 +480,9 @@ aws-sso-switch() {
     fi
 
     # Parse selection
-    IFS='|' read -r account_name role_name account_id <<< "$selected"
+    IFS='|' read -r account_name role_name account_id <<EOF
+$selected
+EOF
     account_name=$(echo "$account_name" | xargs)
     role_name=$(echo "$role_name" | xargs)
     account_id=$(echo "$account_id" | xargs)
@@ -769,7 +777,9 @@ aws-switch-role() {
     fi
 
     # Parse role configuration
-    IFS=':' read -r alias role_arn source_profile session_name duration <<< "$role_config"
+    IFS=':' read -r alias role_arn source_profile session_name duration <<EOF
+$role_config
+EOF
 
     # Set defaults
     source_profile="${source_profile:-default}"

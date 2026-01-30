@@ -602,7 +602,9 @@ rds_forward() {
     fi
     
     # Parse RDS configuration
-    IFS=':' read -r env_name host remote_port local_port <<< "$rds_config"
+    IFS=':' read -r env_name host remote_port local_port <<EOF
+$rds_config
+EOF
     remote_port="${remote_port:-3306}"
     local_port="${local_port:-13306}"
     

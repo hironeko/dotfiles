@@ -46,7 +46,9 @@ _mfa_resolve_rds_env() {
   local entry env host rport lport
   [[ ${#MFA_RDS_ENVIRONMENTS[@]} -gt 0 ]] 2>/dev/null || return 1
   for entry in "${MFA_RDS_ENVIRONMENTS[@]}"; do
-    IFS=':' read -r env host rport lport <<< "$entry"
+    IFS=':' read -r env host rport lport <<EOF
+$entry
+EOF
     if [[ "$env" == "$target_env" ]]; then
       if [[ "$mode" == "print" ]]; then
         printf '%s %s %s %s\n' "$env" "$host" "$rport" "$lport"
@@ -745,10 +747,10 @@ mfa_rds_forward() {
   if [[ -z "$rds_host" || -z "$remote_port" || -z "$local_port" ]]; then
     local env_info env_name env_host env_rport env_lport
     if env_info=$(_mfa_resolve_rds_env print 2>/dev/null); then
-      env_name=$(awk '{print $1}' <<<"$env_info")
-      env_host=$(awk '{print $2}' <<<"$env_info")
-      env_rport=$(awk '{print $3}' <<<"$env_info")
-      env_lport=$(awk '{print $4}' <<<"$env_info")
+      env_name=$(printf '%s\n' "$env_info" | awk '{print $1}')
+      env_host=$(printf '%s\n' "$env_info" | awk '{print $2}')
+      env_rport=$(printf '%s\n' "$env_info" | awk '{print $3}')
+      env_lport=$(printf '%s\n' "$env_info" | awk '{print $4}')
       [[ -z "$rds_host" ]] && rds_host="$env_host"
       [[ -z "$remote_port" ]] && remote_port="$env_rport"
       [[ -z "$local_port" ]] && local_port="$env_lport"

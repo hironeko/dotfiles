@@ -2,6 +2,15 @@
 
 local opt = vim.opt
 
+-- Ensure Homebrew binaries are available even when Neovim is launched from GUI apps.
+local function _prepend_path(dir)
+  if vim.fn.isdirectory(dir) == 1 and not vim.env.PATH:find(dir, 1, true) then
+    vim.env.PATH = dir .. ":" .. vim.env.PATH
+  end
+end
+_prepend_path("/opt/homebrew/bin")
+_prepend_path("/usr/local/bin")
+
 -- Line numbers
 opt.number = true
 opt.relativenumber = true
