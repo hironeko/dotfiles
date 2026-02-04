@@ -71,6 +71,17 @@ opt.showmode = false
 opt.updatetime = 300
 opt.timeoutlen = 1000 -- Increased for better keymap experience
 
+-- Auto-reload files changed outside of Neovim
+opt.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI", "TermLeave" }, {
+  command = "checktime",
+})
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+  callback = function()
+    vim.notify("File changed on disk. Buffer reloaded.", vim.log.levels.INFO)
+  end,
+})
+
 -- Scroll offset
 opt.scrolloff = 8
 opt.sidescrolloff = 8
