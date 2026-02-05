@@ -14,9 +14,9 @@ return {
     { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Find help" },
     { "<leader>fd", "<cmd>Telescope file_browser<cr>", desc = "File browser" },
     { "<leader>fD", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", desc = "File browser (current dir)" },
-    { "<leader>gl", "<cmd>Telescope git_commits<cr>", desc = "Git log (repo)" },
-    { "<leader>gL", "<cmd>Telescope git_bcommits<cr>", desc = "Git log (file)" },
-    { "<leader>hb", "<cmd>Telescope git_bcommits<cr>", desc = "Git history (buffer)" },
+    { "<leader>gl", function() require("config.git_log").repo() end, desc = "Git log (repo)" },
+    { "<leader>gL", function() require("config.git_log").file() end, desc = "Git log (file)" },
+    { "<leader>hb", function() require("config.git_log").file() end, desc = "Git history (buffer)" },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",

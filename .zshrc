@@ -202,7 +202,4 @@ readonly COLOR_RESET='\033[0m'
 export GOROOT="$(brew --prefix go)/libexec"
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-<<<<<<< Updated upstream
-=======
 export PATH="$HOME/bin:$PATH"
->>>>>>> Stashed changes
