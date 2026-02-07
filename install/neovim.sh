@@ -15,3 +15,10 @@ if brew list neovim >/dev/null 2>&1; then
 else
   brew install neovim
 fi
+
+# Telescope live_grep needs ripgrep
+if brew list ripgrep >/dev/null 2>&1; then
+  echo "ripgrep already installed... skipping"
+else
+  brew install ripgrep
+fi
