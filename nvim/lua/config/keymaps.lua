@@ -33,6 +33,8 @@ keymap("n", "<C-Up>", ":resize +2<CR>", opts) -- Increase height
 keymap("n", "<C-Down>", ":resize -2<CR>", opts) -- Decrease height
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts) -- Decrease width
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts) -- Increase width
+keymap("n", "<leader><Left>", ":vertical resize -2<CR>", opts) -- Decrease width (macOS-friendly)
+keymap("n", "<leader><Right>", ":vertical resize +2<CR>", opts) -- Increase width (macOS-friendly)
 
 -- Tab management
 keymap("n", "<leader>to", ":tabnew<CR>", opts) -- New tab

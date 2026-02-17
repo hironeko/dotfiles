@@ -48,7 +48,13 @@ setopt auto_menu
 zstyle ":completion:*" menu select
 
 # 大文字小文字を区別しない補完
-zstyle ":completion:*" matcher-list 'm:{a-z}={A-Z}' 'm:{A-Z}={a-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+# 前方/後方一致も許可して曖昧にする
+zstyle ":completion:*" matcher-list \
+  'm:{a-z}={A-Z}' \
+  'm:{A-Z}={a-z}' \
+  'r:|[._-]=* r:|=*' \
+  'l:|=*' \
+  'l:|=* r:|=*'
 
 ## 入力しているコマンド名が間違っている場合にもしかして：を出す。
 setopt correct

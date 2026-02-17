@@ -73,9 +73,46 @@ opt.timeoutlen = 1000 -- Increased for better keymap experience
 
 -- Auto-reload files changed outside of Neovim
 opt.autoread = true
-vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI", "TermLeave" }, {
-  command = "checktime",
+local autoread_group = vim.api.nvim_create_augroup("AutoRead", { clear = true })
+
+local function safe_checktime()
+  if vim.fn.getcmdwintype() == "" then
+    vim.cmd("checktime")
+  end
+end
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  group = autoread_group,
+  callback = function()
+    vim.opt_local.autoread = true
+  end,
 })
+
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI", "VimResume", "TermLeave" }, {
+  group = autoread_group,
+  callback = safe_checktime,
+})
+
+local uv = vim.uv or vim.loop
+if uv and _G.__autoread_timer == nil then
+  local timer = uv.new_timer()
+  _G.__autoread_timer = timer
+  timer:start(2000, 2000, vim.schedule_wrap(function()
+    safe_checktime()
+  end))
+
+  vim.api.nvim_create_autocmd("VimLeavePre", {
+    group = autoread_group,
+    callback = function()
+      if _G.__autoread_timer then
+        _G.__autoread_timer:stop()
+        _G.__autoread_timer:close()
+        _G.__autoread_timer = nil
+      end
+    end,
+  })
+end
+
 vim.api.nvim_create_autocmd("FileChangedShellPost", {
   callback = function()
     vim.notify("File changed on disk. Buffer reloaded.", vim.log.levels.INFO)
