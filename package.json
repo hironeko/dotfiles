@@ -1,13 +1,15 @@
 {
+  "name": "dotfiles",
+  "version": "1.0.0",
+  "description": "Development environment configuration",
   "license": "UNLICENSED",
-  "dependencies": {
-    "babel-eslint": "^7.2.3",
-    "eslint": "^4.3.0",
-    "eslint-plugin-react": "^7.1.0",
-    "next": "^9.3.3",
-    "postcss-cli": "^6.1.2",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "tern": "^0.21.0"
+  "volta": {
+    "node": "latest",
+    "npm": "latest"
+  },
+  "devDependencies": {
+    "claude-cli": "latest",
+    "codex": "latest",
+    "@anthropic-ai/sdk": "latest"
   }
 }

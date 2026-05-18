@@ -1,54 +1,46 @@
 #!/bin/bash
-# dotfiles インストールスクリプト
-# 新規セットアップ時に実行
+# dotfiles インストールスクリプト（簡易版）
+# 完全なセットアップは setup/setup.sh を使用してください
 
 set -e
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "🚀 dotfiles をセットアップ開始"
+echo "🚀 dotfiles セットアップスクリプト"
 echo "=========================================="
 echo ""
-
-# 1. Stow セットアップ
-echo "📦 ステップ 1: GNU Stow によるシンボリックリンク設定"
-if [ -f "$DOTFILES_DIR/stow-setup.sh" ]; then
-    bash "$DOTFILES_DIR/stow-setup.sh"
-else
-    echo "❌ stow-setup.sh が見つかりません"
-    exit 1
-fi
-
+echo "このスクリプトは以下の2つのセットアップを提供します:"
 echo ""
-echo "=========================================="
-echo "📱 ステップ 2: Claude Code desktop app をインストール"
+echo "1. 完全セットアップ（推奨・新規マシン向け）"
+echo "   Homebrew, 開発ツール, Nerd Fonts, Volta, anyenv, dotfiles をインストール"
+echo "   実行: bash setup/setup.sh"
+echo ""
+echo "2. dotfiles のみリンク（既存環境向け）"
+echo "   dotfiles 構成を既存のマシンに適用"
+echo "   実行: bash stow-setup.sh"
+echo ""
+echo "どちらを実行しますか？"
+echo "  [1] 完全セットアップを実行 (setup/setup.sh)"
+echo "  [2] dotfiles のみリンク (stow-setup.sh)"
+echo "  [3] キャンセル"
+echo ""
+read -p "選択 (1/2/3): " choice
 
-# 2. Claude Code desktop app をインストール
-if command -v brew &> /dev/null; then
-    if brew list --cask claude-code &> /dev/null; then
-        echo "✅ Claude Code は既にインストール済みです"
-    else
-        echo "🔽 Claude Code desktop app をインストール中..."
-        if brew install --cask claude-code; then
-            echo "✅ Claude Code をインストールしました"
-        else
-            echo "⚠️  Claude Code のインストールに失敗しました（スキップ可能）"
-        fi
-    fi
-else
-    echo "⚠️  Homebrew がインストールされていません"
-    echo "   手動で Claude Code をインストールしてください:"
-    echo "   brew install --cask claude-code"
-fi
-
-echo ""
-echo "=========================================="
-echo "✅ セットアップが完了しました！"
-echo ""
-echo "📝 次のステップ:"
-echo "  1. シェルをリロード: source ~/.zshrc"
-echo "  2. Claude Code アプリを起動: claude code"
-echo "  3. または Claude Code desktop app を起動"
-echo ""
-echo "🔗 リセット方法:"
-echo "  ./stow-reset.sh"
+case $choice in
+    1)
+        echo ""
+        exec bash "$DOTFILES_DIR/setup/setup.sh" "$@"
+        ;;
+    2)
+        echo ""
+        exec bash "$DOTFILES_DIR/setup/stow-setup.sh"
+        ;;
+    3)
+        echo "キャンセルしました"
+        exit 0
+        ;;
+    *)
+        echo "❌ 無効な選択です"
+        exit 1
+        ;;
+esac
