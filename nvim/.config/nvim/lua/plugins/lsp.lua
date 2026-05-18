@@ -156,6 +156,19 @@ return {
       capabilities = capabilities,
       on_attach = on_attach,
       filetypes = { "php", "blade" },
+      settings = {
+        intelephense = {
+          files = {
+            -- Include vendor directory for library navigation
+            associations = { "*.php", "*.blade.php" },
+            maxSize = 5000000,
+            exclude = { "**/.git/**", "**/node_modules/**", "**/tests/**" },
+          },
+          diagnostics = {
+            enable = true,
+          },
+        },
+      },
     })
   end,
 }

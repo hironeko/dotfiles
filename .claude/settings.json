@@ -6,10 +6,8 @@
       "Bash(ln:*)",
       "Bash(chmod:*)",
       "Bash(brew list:*)",
-      "Bash(gemini:*)"
-    ],
-    "deny": [
-      "Bash(rm -rf:*)"
+      "Bash(gemini:*)",
+      "Bash(rm:*)"
     ]
   }
 }

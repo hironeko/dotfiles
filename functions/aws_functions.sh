@@ -311,16 +311,45 @@ select_aws_profile() {
     return 0
 }
 
+# Activate profile-based auth by clearing temporary env credentials first.
+_aws_activate_profile() {
+    local profile="$1"
+    local had_env_creds=0
+
+    if [[ -n "${AWS_ACCESS_KEY_ID-}" ]] || [[ -n "${AWS_SECRET_ACCESS_KEY-}" ]] || [[ -n "${AWS_SESSION_TOKEN-}" ]] || [[ -n "${AWS_SECURITY_TOKEN-}" ]]; then
+        had_env_creds=1
+    fi
+
+    unset AWS_ACCESS_KEY_ID
+    unset AWS_SECRET_ACCESS_KEY
+    unset AWS_SESSION_TOKEN
+    unset AWS_SECURITY_TOKEN
+    unset AWS_SESSION_EXPIRATION
+    unset AWS_ASSUMED_ROLE_ALIAS
+    unset AWS_MFA_EXPIRATION
+    unset AWS_MFA_SESSION
+
+    if [[ -n "$profile" ]]; then
+        export AWS_PROFILE="$profile"
+    fi
+
+    if [[ $had_env_creds -eq 1 ]]; then
+        _aws_log info "Cleared temporary env credentials and activated profile auth: $profile"
+    fi
+}
+
 # Check AWS authentication status
 check_aws_auth() {
     local profile="$1"
-    local profile_arg=""
-    
+
     if [[ -n "$profile" ]]; then
-        profile_arg="--profile $profile"
+        env -u AWS_ACCESS_KEY_ID -u AWS_SECRET_ACCESS_KEY -u AWS_SESSION_TOKEN -u AWS_SECURITY_TOKEN \
+            aws sts get-caller-identity --profile "$profile" &>/dev/null
+    else
+        aws sts get-caller-identity &>/dev/null
     fi
-    
-    if aws sts get-caller-identity $profile_arg &>/dev/null; then
+
+    if [[ $? -eq 0 ]]; then
         return 0
     else
         return 1
@@ -342,6 +371,7 @@ aws_sso_login() {
     aws sso login --profile "$profile"
     
     if [[ $? -eq 0 ]]; then
+        _aws_activate_profile "$profile"
         _aws_log success "AWS SSO login successful for profile: $profile"
         return 0
     else
@@ -353,6 +383,10 @@ aws_sso_login() {
 # Ensure AWS login (check auth and login if needed)
 ensure_aws_login() {
     local profile="$1"
+
+    if [[ -n "$profile" ]]; then
+        _aws_activate_profile "$profile"
+    fi
     
     if ! check_aws_auth "$profile"; then
         _aws_log warning "AWS authentication is invalid or expired. Attempting login..."
@@ -755,7 +789,7 @@ aws_helper_menu() {
                 profile=$(select_aws_profile)
                 if [[ $? -eq 0 ]]; then
                     _aws_log info "Selected profile: $profile"
-                    export AWS_PROFILE="$profile"
+                    _aws_activate_profile "$profile"
                 fi
                 ;;
             "⚙️  Initialize configuration")

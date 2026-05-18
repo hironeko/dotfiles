@@ -66,3 +66,5 @@ keymap("n", "<leader>nh", ":nohl<CR>", opts)
 -- nvim-tree: <leader>e
 -- telescope: <leader>ff, <leader>fg, <leader>fb, etc.
 -- LSP: gd, gD, gr, K, etc.
+-- neogit: <leader>go, <leader>gc, <leader>gp, <leader>gl, <leader>gb
+-- diffview: <leader>gd, <leader>gh, <leader>gH, <leader>gq

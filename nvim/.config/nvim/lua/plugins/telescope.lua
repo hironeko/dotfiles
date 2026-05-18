@@ -104,7 +104,7 @@ return {
           hidden = true,
           -- Follow symbolic links
           follow = true,
-          -- Only ignore .git directory
+          -- Only ignore .git directory, but include vendor (for Laravel, etc.)
           find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
         },
         live_grep = {

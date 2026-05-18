@@ -55,6 +55,19 @@ vim.filetype.add({
   },
 })
 
+-- PHP/Blade indentation (PSR-style)
+local php_indent_group = vim.api.nvim_create_augroup("PhpIndent", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  group = php_indent_group,
+  pattern = { "php", "blade" },
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.softtabstop = 4
+    vim.opt_local.expandtab = true
+  end,
+})
+
 -- Undo and backup
 opt.undofile = true
 opt.backup = false

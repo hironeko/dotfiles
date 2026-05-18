@@ -1,0 +1,25 @@
+{
+  "Style": {
+    "Basic": ["on_default", "default"],
+    "Selected": ["underline", "on_cyan", "black"],
+    "Query": ["yellow", "bold"],
+    "SavedSelection": ["black", "on_yellow"],
+    "Matched": ["on_default", "magenta"]
+  },
+  "Keymap": {
+    "C-p": "peco.SelectPrevious",
+    "C-n": "peco.SelectNext",
+    "C-f": "peco.ScrollPageDown",
+    "C-b": "peco.ScrollPageUp",
+    "C-k": "peco.DeleteForwardChar",
+    "C-u": "peco.KillBeginningOfLine",
+    "M-v": "peco.ScrollPageUp"
+  },
+  "Prompt": "🔍 QUERY >",
+  "InitialMatcher": "IgnoreCase",
+  "InitialFilter": "Fuzzy",
+  "CustomMatcher": {
+    "IgnoreCase": ["IgnoreCaseMatch"],
+    "Fuzzy": ["IgnoreCaseFuzzyMatch"]
+  }
+}
