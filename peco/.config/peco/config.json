@@ -17,9 +17,5 @@
   },
   "Prompt": "🔍 QUERY >",
   "InitialMatcher": "IgnoreCase",
-  "InitialFilter": "Fuzzy",
-  "CustomMatcher": {
-    "IgnoreCase": ["IgnoreCaseMatch"],
-    "Fuzzy": ["IgnoreCaseFuzzyMatch"]
-  }
+  "InitialFilter": "Fuzzy"
 }
