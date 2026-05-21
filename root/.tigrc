@@ -1,0 +1,26 @@
+# tig configuration
+
+# Keybindings
+bind generic q quit
+bind generic <C-c> quit
+bind status c !@git commit
+bind main <C-l> refresh
+
+# Colors
+set line-graphics = utf-8
+
+# View settings
+set main-view = line-number:no,interval:5 id:yes date:short author:short commit-title:yes,graph,refs,overflow=commit
+set blame-view = line-number:yes,interval:5 id:yes date:short author:short text
+set log-view = line-number:yes,interval:5 id:yes date:short author:short commit-title:yes,graph,refs,overflow=commit
+set diff-view = line-number:yes,interval:5 text
+
+# Pager settings
+set pager-view = line-number:yes,interval:5 text
+set stage-view = line-number:yes,interval:5 text
+
+# Misc
+set ignore-case = true
+set ignore-space = some
+set tab-size = 4
+set commit-encoding = UTF-8

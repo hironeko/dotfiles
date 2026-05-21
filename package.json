@@ -7,7 +7,13 @@
     "node": "latest",
     "npm": "latest"
   },
+  "scripts": {
+    "prepare": "husky install"
+  },
   "devDependencies": {
+    "husky": "latest",
+    "prettier": "latest",
+    "shfmt": "latest",
     "claude-cli": "latest",
     "codex": "latest",
     "@anthropic-ai/sdk": "latest"

@@ -4,7 +4,7 @@
 set -e
 
 DOTFILES_DIR="$HOME/dotfiles"
-PACKAGES=(zsh tmux nvim peco bin functions docker zed)
+PACKAGES=(zsh tmux nvim peco bin functions zed root)
 
 echo "🔗 GNU Stow を使用した dotfiles リンク設定を開始します"
 echo "=========================================="

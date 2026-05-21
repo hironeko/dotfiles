@@ -1,0 +1,42 @@
+#!/bin/sh
+# Pre-commit hook: format and lint (staged files only)
+
+set -e
+
+echo "🔍 Formatting staged files..."
+
+# Get staged files
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
+
+if [ -z "$STAGED_FILES" ]; then
+  echo "No staged files to format"
+  exit 0
+fi
+
+# Format JSON, YAML, Markdown with prettier
+PRETTIER_FILES=$(echo "$STAGED_FILES" | grep -E '\.(json|yaml|yml|md|md)$' || true)
+if [ -n "$PRETTIER_FILES" ]; then
+  echo "$PRETTIER_FILES" | xargs prettier --write
+fi
+
+# Format shell scripts with shfmt
+SHELL_FILES=$(echo "$STAGED_FILES" | grep -E '\.sh$' || true)
+if [ -n "$SHELL_FILES" ]; then
+  if command -v shfmt >/dev/null 2>&1; then
+    echo "🔧 Formatting shell scripts..."
+    echo "$SHELL_FILES" | xargs shfmt -i 2 -w
+  else
+    echo "⚠️  shfmt not installed (skipping shell format)"
+  fi
+fi
+
+# Lint shell scripts
+if [ -n "$SHELL_FILES" ] && command -v shellcheck >/dev/null 2>&1; then
+  echo "🔎 Running shellcheck on staged files..."
+  echo "$SHELL_FILES" | xargs shellcheck 2>/dev/null || true
+fi
+
+# Re-stage formatted files
+echo "$PRETTIER_FILES $SHELL_FILES" | tr ' ' '\n' | grep -v '^$' | xargs git add
+
+echo "✅ Pre-commit checks passed"
