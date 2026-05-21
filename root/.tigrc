@@ -2,7 +2,7 @@
 
 # Keybindings
 bind generic q quit
-bind status c !@git commit
+bind status c !git commit
 bind main <C-l> refresh
 
 # Graphics
