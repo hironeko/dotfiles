@@ -41,6 +41,17 @@ opt.splitright = true
 -- Clipboard
 opt.clipboard = "unnamedplus"
 
+-- Host paste support (SSH/remote sessions)
+-- Enable system clipboard provider detection
+if vim.fn.exists("$SSH_TTY") == 1 then
+  -- SSH session: use OSC 52 for clipboard
+  vim.g.clipboard = {
+    name = "osc52",
+    copy = { "+", "y" },
+    paste = { "+", "p" },
+  }
+end
+
 -- Backspace behavior
 opt.backspace = "indent,eol,start"
 

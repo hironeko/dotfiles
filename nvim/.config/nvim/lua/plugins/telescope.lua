@@ -95,6 +95,9 @@ return {
             ["<C-k>"] = actions.move_selection_previous,
             ["<C-j>"] = actions.move_selection_next,
             ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+            ["<C-x>"] = actions.select_horizontal,
+            ["<C-v>"] = actions.select_vertical,
+            ["<C-t>"] = actions.select_tab,
           },
         },
       },
@@ -104,13 +107,13 @@ return {
           hidden = true,
           -- Follow symbolic links
           follow = true,
-          -- Only ignore .git directory, but include vendor (for Laravel, etc.)
-          find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
+          -- Case-insensitive search: ignore case always
+          find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*", "-i" },
         },
         live_grep = {
-          -- Search in hidden files
+          -- Search in hidden files and case-insensitive
           additional_args = function()
-            return { "--hidden", "--glob", "!.git/*" }
+            return { "--hidden", "--glob", "!.git/*", "-i" }
           end,
         },
       },

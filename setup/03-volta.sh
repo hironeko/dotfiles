@@ -40,9 +40,11 @@ else
     fi
 fi
 
-# Install latest Node.js
-log_info "最新の Node.js をインストール中..."
-if volta install node@latest; then
+# Install Node.js (use LTS version)
+# Note: Volta requires explicit version numbers, not "latest"
+NODE_VERSION="22.18.0"
+log_info "Node.js v${NODE_VERSION} をインストール中..."
+if volta install "node@${NODE_VERSION}"; then
     log_success "Node.js をインストールしました"
     node --version
     npm --version

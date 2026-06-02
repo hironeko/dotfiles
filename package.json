@@ -4,8 +4,8 @@
   "description": "Development environment configuration",
   "license": "UNLICENSED",
   "volta": {
-    "node": "latest",
-    "npm": "latest"
+    "node": "24.16.0",
+    "npm": "10.9.3"
   },
   "scripts": {
     "prepare": "husky install"

@@ -106,6 +106,19 @@ Homebrew は `/opt/homebrew` にインストールされ、自動的に PATH が
 source ~/.zshrc
 ```
 
+### Volta で "latest" エラーが出る
+**Volta は `latest` バージョンをサポートしていません。** 具体的なバージョン番号を指定してください：
+```bash
+# ❌ これは動きません
+volta install node@latest
+
+# ✅ こう指定します
+volta install node@22.18.0
+
+# package.json の volta セクションも具体的なバージョンが必須
+# "volta": { "node": "22.18.0", "npm": "10.9.3" }
+```
+
 ### anyenv 言語環境が必要な場合
 ```bash
 # 使用可能な環境を確認
