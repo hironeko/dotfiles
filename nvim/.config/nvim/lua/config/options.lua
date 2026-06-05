@@ -150,3 +150,6 @@ opt.sidescrolloff = 8
 -- Folding
 opt.foldmethod = "indent"
 opt.foldlevel = 99
+
+-- Enable syntax highlighting
+vim.cmd("syntax on")

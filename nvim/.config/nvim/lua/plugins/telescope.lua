@@ -80,6 +80,24 @@ return {
     telescope.setup({
       defaults = {
         path_display = { "truncate" },
+        -- Keep syntax highlighting in preview
+        preview = {
+          treesitter = true,
+          mime_hook = function(filepath, bufnr, opts)
+            local is_image = function(filepath_)
+              local image_extensions = { "png", "jpg", "jpeg", "gif", "webp" }
+              local split_path = vim.split(filepath_:lower(), ".")
+              local extension = split_path[#split_path]
+              return vim.tbl_contains(image_extensions, extension)
+            end
+            if is_image(filepath) then
+              local term = vim.api.nvim_open_term(bufnr, {})
+              vim.fn.termopen("cat " .. vim.fn.fnameescape(filepath), { on_exit = function() end })
+            else
+              require("telescope.previewers.utils").set_preview_command(bufnr, opts)
+            end
+          end,
+        },
         -- Case-insensitive search by default
         vimgrep_arguments = {
           "rg",

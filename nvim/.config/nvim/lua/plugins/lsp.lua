@@ -12,8 +12,22 @@ return {
     local keymap = vim.keymap.set
 
     local opts = { noremap = true, silent = true }
+
+    -- Disable LSP semantic tokens in favor of Treesitter highlighting
+    local function disable_semantic_tokens(client, _)
+      client.server_capabilities.semanticTokensProvider = nil
+    end
+
     local on_attach = function(client, bufnr)
       opts.buffer = bufnr
+
+      -- Set position encoding (required for Neovim 0.11+)
+      if not client.offset_encoding then
+        client.offset_encoding = "utf-8"
+      end
+
+      -- Disable semantic tokens to let Treesitter handle highlighting
+      disable_semantic_tokens(client, bufnr)
 
       -- VSCode-like keybindings
       opts.desc = "Show LSP references"

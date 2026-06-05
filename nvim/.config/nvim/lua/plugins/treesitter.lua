@@ -52,6 +52,27 @@ return {
       ts.install(parsers)
     end)
 
+    -- Setup Treesitter configuration
+    local ok_configs, configs = pcall(require, "nvim-treesitter.configs")
+    if ok_configs then
+      configs.setup({
+        ensure_installed = parsers,
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = true,
+          disable = function(lang, bufnr)
+            if lang == "php" or lang == "blade" then
+              return false
+            end
+            return false
+          end,
+        },
+        indent = {
+          enable = true,
+        },
+      })
+    end
+
     -- Enable ts-autotag for HTML/JSX auto-closing
     local ok_autotag, autotag = pcall(require, "nvim-ts-autotag")
     if ok_autotag then
@@ -64,12 +85,15 @@ return {
       })
     end
 
-    -- Ensure treesitter starts for blade files
+    -- Ensure treesitter starts for specific filetypes
     vim.api.nvim_create_autocmd("FileType", {
-      pattern = "blade",
+      pattern = { "blade", "php", "javascript", "typescript", "tsx", "html", "css", "json", "lua", "python", "go", "rust" },
       callback = function()
         pcall(vim.treesitter.start)
       end,
     })
+
+    -- Enable vim syntax highlighting as fallback
+    vim.cmd("syntax enable")
   end,
 }
