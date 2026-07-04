@@ -21,6 +21,12 @@ alias tks='tmux kill-session'
 alias tl='tmux ls'
 alias ta='tmux a'
 
+# herdr
+alias hs='herdr --session'
+alias hks='herdr session stop'
+alias hl='herdr session list'
+alias ha='herdr session attach'
+
 
 # docker-compose
 alias dc="docker compose"
