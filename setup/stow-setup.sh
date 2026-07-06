@@ -34,6 +34,9 @@ for package in "${PACKAGES[@]}"; do
         peco)
             [ -L "$HOME/.config/peco" ] && mkdir -p "$BACKUP_DIR" && mv "$HOME/.config/peco" "$BACKUP_DIR/" || true
             ;;
+        herdr)
+            [ -L "$HOME/.config/herdr" ] && mkdir -p "$BACKUP_DIR" && mv "$HOME/.config/herdr" "$BACKUP_DIR/" || true
+            ;;
     esac
 done
 

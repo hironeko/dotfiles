@@ -17,6 +17,12 @@ rename_tab = "prefix+comma"
 previous_agent = "cmd+alt+up"
 next_agent = "cmd+alt+down"
 
+# Pane navigation with arrow keys (like tmux default)
+focus_pane_left = "prefix+left"
+focus_pane_right = "prefix+right"
+focus_pane_up = "prefix+up"
+focus_pane_down = "prefix+down"
+
 # tmux: bind g display-popup "lazygit" -> prefix+g は herdr のデフォルトで
 # goto に割り当て済みのため、公式サンプル通り prefix+alt+g を使用
 [[keys.command]]

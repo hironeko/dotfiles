@@ -98,7 +98,7 @@ return {
             end
           end,
         },
-        -- Case-insensitive search by default
+        -- Case-insensitive search by default (fixed-strings mode for literal matching)
         vimgrep_arguments = {
           "rg",
           "--color=never",
@@ -107,6 +107,7 @@ return {
           "--line-number",
           "--column",
           "--smart-case",
+          "--fixed-strings",
         },
         mappings = {
           i = {
@@ -114,8 +115,11 @@ return {
             ["<C-j>"] = actions.move_selection_next,
             ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
             ["<C-x>"] = actions.select_horizontal,
-            ["<C-v>"] = actions.select_vertical,
+            ["<C-s>"] = actions.select_vertical,
             ["<C-t>"] = actions.select_tab,
+            ["<C-r>"] = function()
+              vim.api.nvim_feedkeys(vim.fn.getreg("+"), "i", false)
+            end,
           },
         },
       },

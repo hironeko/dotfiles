@@ -60,8 +60,9 @@ echo "  2. 開発ツール インストール"
 echo "  3. Nerd Fonts インストール"
 echo "  4. Volta (Node.js) セットアップ"
 echo "  5. anyenv (マルチ言語) セットアップ"
-echo "  6. dotfiles リンク設定 (GNU Stow)"
-echo "  7. Claude Code desktop app インストール"
+echo "  6. Herdr インストール"
+echo "  7. dotfiles リンク設定 (GNU Stow)"
+echo "  8. Claude Code desktop app インストール"
 echo ""
 
 # Step 1: Homebrew
@@ -95,7 +96,10 @@ else
     log_warning "anyenv セットアップをスキップしました"
 fi
 
-# Step 6: Stow dotfiles
+# Step 6: Herdr
+bash "$SCRIPT_DIR/05-herdr.sh" || exit 1
+
+# Step 7: Stow dotfiles
 print_header "GNU Stow によるシンボリックリンク設定"
 if [ -f "$SCRIPT_DIR/stow-setup.sh" ]; then
     bash "$SCRIPT_DIR/stow-setup.sh" || exit 1

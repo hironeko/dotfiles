@@ -173,13 +173,20 @@ return {
       settings = {
         intelephense = {
           files = {
-            -- Include vendor directory for library navigation
             associations = { "*.php", "*.blade.php" },
             maxSize = 5000000,
             exclude = { "**/.git/**", "**/node_modules/**", "**/tests/**" },
           },
           diagnostics = {
             enable = true,
+          },
+          completion = {
+            fullyQualifyGlobalConstantsAndFunctions = false,
+            insertUseDeclaration = true,
+            triggerParameterHints = true,
+          },
+          references = {
+            exclude = { "**/vendor/**" },
           },
         },
       },

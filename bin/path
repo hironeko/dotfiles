@@ -74,3 +74,6 @@ export PHP_BUILD_CONFIGURE_OPTS="--with-bz2=$(brew --prefix bzip2) --with-iconv=
 # openssl
 export PATH="/usr/local/opt/openssl@3/bin:$PATH"
 
+
+
+export PATH="$HOME/.local/bin:$PATH"
