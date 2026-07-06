@@ -4,7 +4,7 @@
 set -e
 
 DOTFILES_DIR="$HOME/dotfiles"
-PACKAGES=(zsh tmux nvim peco bin functions docker zed)
+PACKAGES=(zsh tmux nvim peco bin functions docker zed herdr)
 
 echo "🗑️  GNU Stow リンクをアンリンク中..."
 echo "=========================================="

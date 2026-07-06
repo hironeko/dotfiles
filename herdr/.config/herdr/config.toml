@@ -1,0 +1,42 @@
+# herdr configuration
+# tmux (~/dotfiles/tmux/.tmux.conf) の設定・キーバインドに合わせて調整
+
+[theme]
+# tmuxのステータスバーがNordic系の青カラーだったため、近い組み込みテーマを採用
+name = "nord"
+
+[keys]
+# tmux側で C-b -> C-t に変更しているのに合わせる
+prefix = "ctrl+t"
+
+# tmux: bind -r C-r source-file ~/.tmux.conf (設定リロード)
+reload_config = "prefix+ctrl+r"
+
+# Agent上下移動とタブリネームを楽に
+rename_tab = "prefix+comma"
+previous_agent = "cmd+alt+up"
+next_agent = "cmd+alt+down"
+
+# tmux: bind g display-popup "lazygit" -> prefix+g は herdr のデフォルトで
+# goto に割り当て済みのため、公式サンプル通り prefix+alt+g を使用
+[[keys.command]]
+key = "prefix+alt+g"
+type = "pane"
+command = "lazygit"
+
+# tmux: bind t display-popup "tig" -> 上と揃えて prefix+alt+t
+[[keys.command]]
+key = "prefix+alt+t"
+type = "pane"
+command = "tig"
+
+[ui]
+# タブをサクサク切りたい(名前入力をスキップ)
+prompt_new_tab_name = false
+
+# tmux: set-window-option -g mouse on
+mouse_capture = true
+
+[ui.sound]
+# 音がうるさい
+enabled = false
