@@ -31,7 +31,7 @@ return {
 
       -- VSCode-like keybindings
       opts.desc = "Show LSP references"
-      keymap("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
+      keymap("n", "<leader>gr", "<cmd>Telescope lsp_references<CR>", opts)
       keymap("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
 
       opts.desc = "Go to declaration"

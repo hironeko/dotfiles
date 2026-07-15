@@ -21,12 +21,13 @@ FONTS=(
 )
 
 log_info "Nerd Fonts をインストール中..."
+
+# homebrew/cask-fonts tap is no longer needed in modern Homebrew
 for font in "${FONTS[@]}"; do
     if brew_installed "$font"; then
         log_warning "$font は既にインストール済みです"
     else
         log_info "$font をインストール中..."
-        brew tap homebrew/cask-fonts
         brew install --cask "$font" || true
     fi
 done
