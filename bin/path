@@ -1,5 +1,6 @@
 # path
 export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 export PATH="$PATH:~/.local/bin"
 
 # custom commands
