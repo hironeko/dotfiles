@@ -16,10 +16,19 @@ alias g-p-o="git pull origin"
 alias g-c-b="git checkout -b"
 
 # tmux
-alias ts='tmux new -s'
-alias tks='tmux kill-session'
-alias tl='tmux ls'
-alias ta='tmux a'
+# 対話的なターミナルでのみtmuxコマンドを実行
+if [[ -t 0 && -t 1 ]]; then
+  alias ts='tmux new -s'
+  alias tks='tmux kill-session'
+  alias tl='tmux ls'
+  alias ta='tmux a'
+else
+  # 非対話的環境（Claude Codeなど）では警告を表示
+  alias ts='echo "⚠️  tmux requires an interactive terminal. Use: ! tmux new -s"'
+  alias tks='echo "⚠️  tmux requires an interactive terminal. Use: ! tmux kill-session"'
+  alias tl='tmux ls'  # 読み取り専用なのでOK
+  alias ta='echo "⚠️  tmux attach requires an interactive terminal. Use: ! tmux a"'
+fi
 
 # herdr
 alias hs='herdr --session'

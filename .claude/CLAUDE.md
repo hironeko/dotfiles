@@ -21,6 +21,7 @@ This is a dotfiles repository for managing development environment configuration
 - Version control: Git with worktree support
 
 ## Recent Updates:
+- Using Neovim 0.11.5 via bob (position_encoding warnings are harmless)
 - Implemented Powerlevel10k theme for beautiful prompts with Powerline arrows
 - Modernized tmux status bar with blue Nordic color scheme and Powerline design
 - Added Nerd Fonts support (Hack, FiraCode, MesloLG)

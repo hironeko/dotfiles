@@ -1,3 +1,4 @@
+onboarding = false
 # herdr configuration
 # tmux (~/dotfiles/tmux/.tmux.conf) の設定・キーバインドに合わせて調整
 
@@ -6,8 +7,8 @@
 name = "nord"
 
 [keys]
-# tmux側で C-b -> C-t に変更しているのに合わせる
-prefix = "ctrl+t"
+# herdr のプレフィックスは ctrl+s
+prefix = "ctrl+s"
 
 # tmux: bind -r C-r source-file ~/.tmux.conf (設定リロード)
 reload_config = "prefix+ctrl+r"

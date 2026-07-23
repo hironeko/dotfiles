@@ -14,3 +14,7 @@ functions/aws_mfa_config.sh
 !.claude/CLAUDE.md
 !.claude/settings.json
 !.claude/commands/
+
+# herdr logs
+herdr/.config/herdr/*.log
+herdr/.config/herdr/session.json

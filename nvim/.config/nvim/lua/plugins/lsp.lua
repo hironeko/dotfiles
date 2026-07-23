@@ -13,6 +13,14 @@ return {
 
     local opts = { noremap = true, silent = true }
 
+    -- Fix for Neovim 0.11 LSP references bug (includeDeclaration undefined)
+    local original_references = vim.lsp.buf.references
+    vim.lsp.buf.references = function(context, options)
+      context = context or {}
+      context.includeDeclaration = context.includeDeclaration ~= false
+      return original_references(context, options)
+    end
+
     -- Disable LSP semantic tokens in favor of Treesitter highlighting
     local function disable_semantic_tokens(client, _)
       client.server_capabilities.semanticTokensProvider = nil
@@ -31,8 +39,7 @@ return {
 
       -- VSCode-like keybindings
       opts.desc = "Show LSP references"
-      keymap("n", "<leader>gr", "<cmd>Telescope lsp_references<CR>", opts)
-      keymap("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
+      keymap("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
 
       opts.desc = "Go to declaration"
       keymap("n", "gD", vim.lsp.buf.declaration, opts)

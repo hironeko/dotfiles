@@ -2,24 +2,23 @@
 
 set -e
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/common.sh"
+source "$(dirname "$0")/common.sh"
 
-run_setup "Herdr インストール"
+echo_step "Installing Herdr..."
 
 # Check if Herdr is already installed
 if command -v herdr &> /dev/null; then
-    log_warning "Herdr は既にインストール済みです"
+    echo_success "Herdr is already installed"
 else
-    log_info "Herdr をダウンロードしてインストール中..."
+    echo_info "Downloading and installing Herdr..."
     curl -fsSL https://herdr.dev/install.sh | sh
 
     if command -v herdr &> /dev/null; then
-        log_success "Herdr を正常にインストールしました"
+        echo_success "Herdr installed successfully"
     else
-        log_error "Herdr のインストールに失敗しました"
+        echo_error "Failed to install Herdr"
         exit 1
     fi
 fi
 
-log_success "Herdr のセットアップが完了しました"
+echo_success "Herdr setup complete"
